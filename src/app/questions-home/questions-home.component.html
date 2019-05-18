@@ -1,0 +1,12 @@
+
+<div class='row'>
+  <div class='col'>
+    <div class="card" *ngFor="let question of topics">
+      <div class="card-body">
+        <h6 class="card-title text-truncate" title='{{ question.title }}'>{{ question.title }}</h6>
+        <p class="card-text faded">{{ question.timestamp | date }} <br> {{ question.topic }}</p>
+        <a href="#" class="card-link">More ...</a>
+        <a href="#" class="card-link">Follow <i class='fa fa-bookmark-o'></i></a>
+      </div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SetUserService } from '../set-user.service'
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  private user: any;
+  constructor(private service: SetUserService) {
+    this.user = this.service.getUserData();
+    localStorage.setItem('user', JSON.stringify(this.user));
+  }
 
   ngOnInit() {
   }
