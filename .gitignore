@@ -16,6 +16,7 @@
 /.idea
 .project
 .classpath
+.env
 .c9/
 *.launch
 .settings/
