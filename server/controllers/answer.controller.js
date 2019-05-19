@@ -13,6 +13,8 @@ module.exports = {
 }
 
 async function insert(answer) {
+  answer.downvote = 0;
+  answer.upvote = 0;
   answer = await Joi.validate(answer, answerSchema, { abortEarly: false });
-  return await new Answer(question).save();
+  return await new Answer(answer).save();
 }
