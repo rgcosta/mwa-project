@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const Question = require('../models/question.model');
-
 const questionSchema = Joi.object({
   title: Joi.string().required(),
   topic: Joi.string().required(),
@@ -14,7 +13,10 @@ const questionSchema = Joi.object({
 module.exports = {
   insert,
   getAll,
-  getById
+  getById,
+  addAnswer,
+  upvoteAnswer,
+  downvoteAnswer
 };
 
 async function insert(question) {
@@ -31,3 +33,22 @@ async function getById(id) {
   return await Question.findById(id);
 }
 
+//--------------- query answers
+
+
+async function addAnswer(id,answer){
+  answer.downvote = 0;
+  answer.upvote = 0;
+  return await Question.update({_id:id}, {$push:{ answers: answer }});
+}
+
+
+async function upvoteAnswer(id,answerId){
+  return await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.upvote": 1 }});
+}
+
+
+
+async function downvoteAnswer(id,answerId){
+  return await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.downvote": 1 }});
+}

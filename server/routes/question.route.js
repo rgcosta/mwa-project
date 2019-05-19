@@ -15,6 +15,14 @@ router.route('/')
 router.route('/:id')
     .get(asyncHandler(getById));
 
+router.route('/:id/answers')
+    .post(asyncHandler(addAnswer));
+router.route('/:id/answers/:answerId/upvote')
+    .post(asyncHandler(upvoteAnswer));
+router.route('/:id/answers/:answerId/downvote')
+    .post(asyncHandler(downvoteAnswer));
+
+
 async function insert(req, res) {
   // let user = req.user;
   // req.body.author = user.email;
@@ -31,3 +39,18 @@ async function getById(req, res) {
   const question = await questionCtrl.getById(req.params.id);
   res.status(200).json(question);
 }
+async function addAnswer(req,res) {
+  const question = await questionCtrl.addAnswer(req.params.id,req.body);
+  res.status(200).json(question);
+}
+
+async function upvoteAnswer(req,res) {
+  const question = await questionCtrl.upvoteAnswer(req.params.id,req.params.answerId);
+  res.status(200).json(question);
+}
+
+async function downvoteAnswer(req,res) {
+  const question = await questionCtrl.downvoteAnswer(req.params.id,req.params.answerId);
+  res.status(200).json(question);
+}
+
