@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {QuestionService} from './home.service';
+import {MomentModule} from 'ngx-moment';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  constructor(private question:QuestionService){}
+  private Question:any;
 
-  constructor() { }
+
+
 
   ngOnInit() {
+this.question.getQuestions().subscribe(data=>{
+  console.log(data);
+  this.Question = data;
+});
+
   }
 
 }
