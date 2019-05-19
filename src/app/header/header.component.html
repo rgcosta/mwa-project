@@ -1,64 +1,53 @@
-<!--header>
-  <mat-toolbar color="primary">
-    <a [routerLink]="['/']" class="logo"></a>
-    <span class="example-spacer"></span>
-    <a class="links side" [routerLink]="['/auth/login']" *ngIf="!user">Login</a>
-    <div>
-      <a class="links side" *ngIf="user" [matMenuTriggerFor]="menu">
-        <mat-icon>account_circle</mat-icon>{{user.fullname}}
-      </a>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item *ngIf="user && user.isAdmin" [routerLink]="['/admin']">admin</button>
-        <button mat-menu-item (click)="logout()">logout</button>
-      </mat-menu>
-    </div>
-  </mat-toolbar>
-</header-->
 
-<nav class="navbar navbar-expand-lg navbar-light ">
-    <div class="container-fluid">
-        <a class="navbar-brand mylogo" th:href="@{index}"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{index}"><i class="fa fa-home"></i> Home</a>
-                </li>
-                <li class="nav-item">
-                    <a th:href="@{/displayBarGraph}" class="nav-link"><i class="fa fa-bell"></i> Report</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{team}"><i class="fa fa-edit"></i> OurTeam</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0 col-md-5">
-                <input class="myform-control mr-sm-2" type="search" placeholder="Search Quora" aria-label="Search">
-                <button class="btn btn-light"><i class="fa fa-search"></i></button>
-            </form>
-            <ul class="navbar-nav ml-auto">
-                <li class="avatar-profile d-none d-sm-block ">
-                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown" ><img th:src="@{assets/img/avatar.png}" height="48px" width="48px" class="img-responsive" /></a>
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <ul class="dropdown-menu">
-                                <li><a th:href="@{/profile}">Profile <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
-                                <li class="divider"></li>
-                                <li><a th:href="@{/login}">Login <span class="glyphicon glyphicon-stats pull-right"></span></a></li>
-                                <li class="divider"></li>
-                                <li class="divider"></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-heart pull-right"></span></a></li>
-                                <li class="divider"></li>
-                                <li><a th:href="@{login}">Sign Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" id="add-question" class="btn mybtn btn-success">Add Question or Link</a>
-                </li>
-            </ul>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+        <div class="container">
+
+            <a class="navbar-brand" [routerLink]="['/']" >
+                <img src="../../assets/logo.png" class="d-inline-block align-top" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" [routerLink]="['/']"><i class="fa fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/']"><i class="far fa-flag"></i> Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/']"><i class="fas fa-user-friends"></i> OurTeam</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search Question" aria-label="Search">
+                    <button class="btn btn-light"><i class="fa fa-search"></i></button>
+                </form>
+                
+                <ul class="navbar-nav ml-auto">
+                    <li class="avatar-profile d-none d-sm-block ">
+                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown" >
+                            <img [src]="src" class="d-inline-block align-top userpic" />
+                        </a>
+                        <div class="nav navbar-nav">
+                            <div class="dropdown">
+                                <div class="dropdown-menu">
+                                    <a href="#" class="dropdown-item"><i class="far fa-user-circle"></i> Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" class="dropdown-item out"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        &nbsp;
+                        &nbsp;
+                        <a href="#" id="add-question" class="btn btn-sm btn-outline-success">Add Question</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>

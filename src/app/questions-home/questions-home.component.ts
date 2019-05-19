@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-top5-questions',
+  selector: 'app-top5',
   templateUrl: './questions-home.component.html',
   styleUrls: ['./questions-home.component.scss']
 })
@@ -12,7 +12,7 @@ export class QuestionsHomeComponent implements OnInit {
   /**
    * Select Questions:
    * Related Topic and Status = open
-   * Select top 10 most relevant questions (with more answers) 
+   * Select top 5 most relevant questions (with more answers) 
    */
   private questions: any = [
     { title: '1.Title 12356?', timestamp: new Date(), topic: 'Tecnology'},
@@ -34,17 +34,22 @@ export class QuestionsHomeComponent implements OnInit {
     { title: '17.Zvdf gbbg?', timestamp: new Date(), topic: 'Tecnology'},
   ];
 
+  private topic: string;
   private topics: any;
   private subscription: Subscription;
 
   constructor(private router: ActivatedRoute) {
     this.subscription = this.router.params.subscribe(param => {
-      this.topics = this.questions.filter(data => data.topic == param.topic);
+      if(param.topic)
+        this.topics = this.questions.filter(data => data.topic == param.topic).slice(0,5);
+      else
+        this.topics = this.questions.slice(0,5);
     });
     
   }
 
   ngOnInit() {
+    this.topic = this.router.snapshot.paramMap.get("topic");
   }
 
   ngOnDestroy(){

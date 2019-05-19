@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SetUserService } from './set-user.service';
+
+import { SetUserService } from './services/set-user.service';
+import { MakeRequestService } from './services/make-request.service'
 
 
 import { AuthService } from './auth/auth.service';
@@ -16,6 +18,7 @@ import * as schema from './schema/equipment.json';
 })
 export class AppComponent implements OnInit {
 
+  // Dummy Test
   private userSubscription: Subscription;
   public user: any;
 
@@ -24,10 +27,17 @@ export class AppComponent implements OnInit {
     private router: Router,
     private domSanitizer: DomSanitizer,
     private matIconRegistry: MatIconRegistry,
-    private service: SetUserService
+    private service: SetUserService,
+    private requests: MakeRequestService
   ) {
     this.registerSvgIcons();
-    
+
+    // Verify at login -> Dummy data
+    this.userSubscription = this.requests.getDataLocal()
+                            .subscribe(data => {
+                              localStorage.setItem('user', JSON.stringify(data));
+                            });
+
   }
 
   public ngOnInit() {
@@ -41,6 +51,10 @@ export class AppComponent implements OnInit {
     this.userSubscription = this.authService.$userSource.subscribe((user) => {
       this.user = user;
     });
+
+    // Dummy data to login
+    this.user = this.service.getCachedData('user');
+    
   }
 
   logout(): void {
