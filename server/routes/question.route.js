@@ -6,7 +6,7 @@ const questionCtrl = require('../controllers/question.controller');
 const router = express.Router();
 module.exports = router;
 
-// router.use(passport.authenticate('jwt', { session: false }))
+router.use(passport.authenticate('jwt', { session: false }))
 
 router.route('/')
     .post(asyncHandler(insert))

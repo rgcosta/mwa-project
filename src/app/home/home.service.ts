@@ -10,7 +10,7 @@ export class QuestionService {
 
     getQuestions() {
 
-      return  this.http.get('/api/question');
+      return  this.http.get('/api/questions');
 
 
     }
