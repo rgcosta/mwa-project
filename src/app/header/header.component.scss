@@ -1,16 +1,16 @@
-header {
+header1 {
     width: 100%;
-    .logo {
+    .logo1 {
       background-image: url('../../assets/logo.png');
       width: 50px;
       height: 50px;
       background-size: contain;
       background-repeat: no-repeat;
     }
-    .example-spacer {
+    .example-spacer1 {
       flex: 1 1 auto;
     }
-    .links {
+    .links1 {
       color: white;
       font-family: 'Helvetica Neue', sans-serif;
       font-size: 15px;
@@ -23,15 +23,34 @@ header {
         padding: 0 14px;
       }
     }
-    .mat-toolbar {
+    .mat-toolbar1 {
       background: black;
     }
-    .mat-icon {
+    .mat-icon1 {
       vertical-align: middle;
       margin: 0 5px;
     }
-    a {
+    a1 {
       cursor: pointer;
     }
   }
- 
+
+a{
+  cursor: pointer;
+}
+a.out{
+  color: rgba(150, 20, 20, 1);
+}
+img.userpic{
+  border-radius: 22px;
+  width: 45px;
+  height: 45px;
+}
+img{
+  width: 45px;
+  height: 45px;
+}
+.title{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: rgb(177, 6, 6);
+}

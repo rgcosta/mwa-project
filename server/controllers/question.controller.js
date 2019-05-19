@@ -1,7 +1,5 @@
 const Joi = require('joi');
 const Question = require('../models/question.model');
-
-
 const questionSchema = Joi.object({
   title: Joi.string().required(),
   topic: Joi.string().required(),
@@ -34,8 +32,6 @@ async function getAll() {
 async function getById(id) {
   return await Question.findById(id);
 }
-
-
 
 //--------------- query answers
 
