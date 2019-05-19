@@ -40,6 +40,10 @@ export class MakeRequestService {
     return this.http.delete(url, this.setHeader);
   }
 
+  getCachedData(item: string){
+    return JSON.parse(localStorage.getItem(item));
+  }
+
   // Dummy - return local data as an Observable
   getDataLocal(){
     const usersObservable = new Observable(observer => {

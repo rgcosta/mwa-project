@@ -1,16 +1,18 @@
-
-<div align="center">
-    <h4><b>Top 5 {{topic}} Questions</b></h4>
-</div>
-<div class="divider"></div>
-<div class='row'>
-  <div class='col'>
-    <div class="card" *ngFor="let question of topics">
-      <div class="card-body">
-        <h5 class="card-title text-truncate" title='{{ question.title }}'>{{ question.title }}</h5>
-        <p class="card-text faded">{{ question.timestamp | date }} <br> <i>{{ question.topic }}</i></p>
-        <a href="#" class="card-link">More ...</a>
-        <a href="#" class="card-link">Follow <i class="far fa-bookmark"></i></a>
+<div class="questions">
+  <div align="center">
+      <h4><b>Top 5 {{topic}} Questions</b></h4>
+  </div>
+  <div class='row'>
+    <div class='col'>
+      <div class="card" *ngFor="let question of topics">
+        <div class="card-body">
+          <h6 class="card-title text-truncate" title='{{ question.title }}'><b>{{ question.title }}</b></h6>
+          <p class="card-text text-muted">{{ question.createdAt | date }} <br> <i><b>{{ question.topic }}</b></i></p>
+          <div align="right">
+            <a href="#" class="card-link">More ...</a>
+            <a href="#" class="card-link">Follow <i class="far fa-bookmark"></i></a>
+          </div>
+        </div>
       </div>
-    </div>
+  </div>
 </div>

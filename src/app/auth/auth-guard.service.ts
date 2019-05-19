@@ -8,9 +8,9 @@ export class AuthGuard implements CanActivate {
 
     canActivate() {
 
-      // Allow unlogged users
-      return true;
-
+      // Allow any user
+      //return true;
+      
       const user = (<any>window).user;
       if (user) return true;
 

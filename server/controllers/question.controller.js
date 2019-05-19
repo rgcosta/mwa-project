@@ -13,7 +13,8 @@ const questionSchema = Joi.object({
 
 module.exports = {
   insert,
-  getAll
+  getAll,
+  getById
 };
 
 async function insert(question) {
@@ -25,3 +26,8 @@ async function insert(question) {
 async function getAll() {
     return await Question.find({});
 }
+
+async function getById(id) {
+  return await Question.findById(id);
+}
+

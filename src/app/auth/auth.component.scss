@@ -17,7 +17,7 @@
 
 .card {
 
-  margin: 50% auto;
+  margin: 20% auto;
   -webkit-transition-duration:0.4s;
   transition-duration:0.4s;
 }
@@ -29,4 +29,9 @@ input {
 .invalid {
   color: red;
   font-size: 14px;
+}
+
+h1{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: rgb(177, 6, 6);
 }

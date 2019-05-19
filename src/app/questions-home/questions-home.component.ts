@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+import { MakeRequestService } from '../services/make-request.service';
+
 @Component({
   selector: 'app-top5',
   templateUrl: './questions-home.component.html',
@@ -9,43 +11,28 @@ import { Subscription } from 'rxjs';
 })
 export class QuestionsHomeComponent implements OnInit {
 
-  /**
-   * Select Questions:
-   * Related Topic and Status = open
-   * Select top 5 most relevant questions (with more answers) 
-   */
-  private questions: any = [
-    { title: '1.Title 12356?', timestamp: new Date(), topic: 'Tecnology'},
-    { title: '2.Rfrbfytgvntynvihafadfas?', timestamp: new Date(), topic: 'Tecnology'},
-    { title: '3.Qtrdbythvgvjbhkllcassd x?', timestamp: new Date(), topic: 'Business'},
-    { title: '4.Affcnvtmuib sfh v abmaf?', timestamp: new Date(), topic: 'Health'},
-    { title: '5.ASDFGH dcmYG HOABFDHOA?', timestamp: new Date(), topic: 'Health'},
-    { title: '6.TPOKMNG jnycsvdgv nGGVCHV?', timestamp: new Date(), topic: 'Business'},
-    { title: '7.Ybhbjn hhyvhbjhmgncsjgcb adjhbcn cjzx Ajgvncsaiuvjnafd?', timestamp: new Date(), topic: 'Tecnology'},
-    { title: '8.Cbrfuxygminlsf?', timestamp: new Date(), topic: 'Tecnology'},
-    { title: '9.Mnucywoubhah oucqnifjnvle?', timestamp: new Date(), topic: 'Business'},
-    { title: '10.Wbua fdh njfkvjnkd?', timestamp: new Date(), topic: 'Tecnology'},
-    { title: '11.Ibcjavgdcbhbshhhhbh sdm?', timestamp: new Date(), topic: 'Business'},
-    { title: '12.Opnkasfjnfjnvjadfvnaldkf?', timestamp: new Date(), topic: 'Health'},
-    { title: '13.Pqwertyuisdrsfty ghujcfvgbhnjedgrftgyhu?', timestamp: new Date(), topic: 'Tecnology'},
-    { title: '14.Hscsgvdvj asihicywechecs dksjdcjks aduhjkd?', timestamp: new Date(), topic: 'Business'},
-    { title: '15.Zvdf gbbg?', timestamp: new Date(), topic: 'Health'},
-    { title: '16.Zvdf gbbg?', timestamp: new Date(), topic: 'Business'},
-    { title: '17.Zvdf gbbg?', timestamp: new Date(), topic: 'Tecnology'},
-  ];
-
+  private label: string = 'questions';
+  private url: string = '/api/question';
   private topic: string;
   private topics: any;
   private subscription: Subscription;
+  private questionssubs: Subscription;
 
-  constructor(private router: ActivatedRoute) {
+  constructor(private router: ActivatedRoute, private service: MakeRequestService) {
     this.subscription = this.router.params.subscribe(param => {
-      if(param.topic)
-        this.topics = this.questions.filter(data => data.topic == param.topic).slice(0,5);
-      else
-        this.topics = this.questions.slice(0,5);
+      param.topic ? this.getQuestions(param.topic) : this.getQuestions();        
     });
-    
+  }
+
+  getQuestions(topic?: any){
+    this.questionssubs = this.service.getData(this.url).subscribe(
+      data => {
+        localStorage.setItem(this.label, JSON.stringify(data));
+        this.topics = topic ?
+                      this.service.getCachedData(this.label).filter(data => data.topic == topic).slice(0,5) :
+                      this.service.getCachedData(this.label).slice(0,5);
+      }
+    )
   }
 
   ngOnInit() {
@@ -54,6 +41,7 @@ export class QuestionsHomeComponent implements OnInit {
 
   ngOnDestroy(){
     this.subscription.unsubscribe();
+    this.questionssubs.unsubscribe();
   }
 
 }

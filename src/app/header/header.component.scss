@@ -34,6 +34,13 @@ header1 {
       cursor: pointer;
     }
   }
+
+a{
+  cursor: pointer;
+}
+a.out{
+  color: rgba(150, 20, 20, 1);
+}
 img.userpic{
   border-radius: 22px;
   width: 45px;
@@ -43,6 +50,7 @@ img{
   width: 45px;
   height: 45px;
 }
-.out{
-  color: rgba(150, 20, 20, 1);
+.title{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: rgb(177, 6, 6);
 }

@@ -29,9 +29,15 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.authService.login(this.email, this.password)
+
+    let {
+      email,
+      password
+    } = this.userForm.getRawValue();
+
+    this.authService.login(email, password)
     .subscribe(data => {
-      this.router.navigate(['']);
+      this.router.navigate(['home']);
     })
   }
 
