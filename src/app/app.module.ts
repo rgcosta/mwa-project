@@ -18,24 +18,25 @@ import { HomeComponent } from './home/home.component';
 import {QuestionService} from './home/home.service';
 import {MomentModule} from 'ngx-moment';
 import {TopicComponent} from './home/topic.component';
+import {HomeModule} from './home/home.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-      TopicComponent,
-    HomeComponent
+    TopicComponent
   ],
   imports: [
     BrowserModule,
+    HomeModule,
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
     SharedModule,
     AuthModule,
     AdminModule,
-      MomentModule,
+    MomentModule,
     AppRoutingModule
   ],
   providers: [QuestionService,{

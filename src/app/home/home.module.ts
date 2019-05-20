@@ -4,11 +4,17 @@ import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routin.module';
 // This Module Components list:
 import { QuestionsHomeComponent } from '../questions-home/questions-home.component';
+import {MomentModule} from 'ngx-moment';
 
 @NgModule({
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    MomentModule
+  ],
+  exports: [
+    HomeComponent,
+    QuestionsHomeComponent
   ],
   declarations: [ HomeComponent, QuestionsHomeComponent ]
 })
