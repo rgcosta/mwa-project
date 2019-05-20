@@ -1,8 +1,5 @@
 const Joi = require('joi');
 const Question = require('../models/question.model');
-const Profile = require('../models/profile.model');
-
-
 const questionSchema = Joi.object({
   title: Joi.string().required(),
   topic: Joi.string().required(),
@@ -22,23 +19,14 @@ module.exports = {
   downvoteAnswer
 };
 
-async function insert(question, user) {
+async function insert(question) {
   question.status = 'open';
   question = await Joi.validate(question, questionSchema, { abortEarly: false });
-  question = await new Question(question).save();
-
-  //Push a ref into the user profile
-  let profile = await Profile.findOneAndUpdate({'user._id': user._id}, {$push: {questions: question._id}});
-  if (!profile) {
-    profile = {user: user, questions: [question._id]};
-    await new Profile(profile).save();
-  }
-  return question;
+  return await new Question(question).save();
 }
 
 async function getAll() {
-    const project = {_id: 1, title: 1, topic: 1, createdAt:1, answers:1};
-    return await Question.find({}, project);
+    return await Question.find({});
 }
 
 async function getById(id) {

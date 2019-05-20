@@ -2,15 +2,17 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../auth/auth.service';
+import { useAnimation } from '@angular/animations';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
 
   @Input() user: any = {};
+  public src: string = '../../assets/land.png';
 
   constructor(
     private authService: AuthService,
@@ -18,6 +20,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.user);
   }
 
   logout(): void {

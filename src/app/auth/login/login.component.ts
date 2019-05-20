@@ -6,7 +6,8 @@ import {AuthService} from '../auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../auth.component.scss']
+  styleUrls: ['../auth.component.scss'],
+
 })
 export class LoginComponent implements OnInit {
 
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.authService.login(this.email, this.password)
     .subscribe(data => {
-      this.router.navigate(['']);
+      this.router.navigate(['home']);
     })
   }
 
