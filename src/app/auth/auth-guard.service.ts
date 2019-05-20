@@ -7,6 +7,10 @@ export class AuthGuard implements CanActivate {
   constructor(public router: Router) {}
 
     canActivate() {
+
+      // Allow any user
+      //return true;
+      
       const user = (<any>window).user;
       if (user) return true;
 

@@ -2,7 +2,6 @@ const Joi = require('joi');
 const Question = require('../models/question.model');
 const Profile = require('../models/profile.model');
 
-
 const questionSchema = Joi.object({
   title: Joi.string().required(),
   topic: Joi.string().required(),

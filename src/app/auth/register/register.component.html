@@ -1,4 +1,4 @@
-<mat-card class="example-card">
+<!--mat-card class="example-card">
   <mat-card-header>
     <mat-card-title>Register</mat-card-title>
   </mat-card-header>
@@ -42,4 +42,31 @@
     <button mat-raised-button (click)="register()" color="primary">Register</button>
     <span>Allrady have an account ? <a [routerLink]="['/auth/login']">login</a> here</span>
   </mat-card-actions>
-</mat-card>
+</mat-card-->
+<div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="card-title"><b>Sing up</b></h1>
+        </div>
+        <form class="example-form" [formGroup]="userForm">
+          <div class="card-body">
+
+            <input class="form-control" placeholder="Fullname" formControlName="fullname" name="fullname" required>
+            <input class="form-control" placeholder="Email" formControlName="email" name="email" required>
+            <span class="invalid" *ngIf="email.invalid && email.errors.email"><i class="fas fa-exclamation-triangle"></i> Invalid email address</span>
+            <input class="form-control" placeholder="Password" formControlName="password" type="password" name="password" required>
+            <input class="form-control" placeholder="Reapet Password" formControlName="repeatPassword" type="password" name="repeatPassword" required>
+            <span class="invalid" *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch"><i class="fas fa-exclamation-triangle"></i> Password mismatch</span>
+            <div align="right">
+              <br>
+              <p class="card-text">Allrady have an account? <a [routerLink]="['/auth/login']">login here</a></p>
+            </div>
+          </div>
+          <div class="card-footer text-muted" align="right">
+            <a href="#" (click)="register()" class="btn btn-primary">Sign up</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

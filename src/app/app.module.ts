@@ -25,7 +25,7 @@ import {TopicComponent} from './home/topic.component';
     AppComponent,
     HeaderComponent,
       TopicComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +36,7 @@ import {TopicComponent} from './home/topic.component';
     AuthModule,
     AdminModule,
       MomentModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [QuestionService,{
     provide: HTTP_INTERCEPTORS,
