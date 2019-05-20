@@ -15,8 +15,9 @@ module.exports = {
 }
 
 async function insert(notice, user) {
- // todo add
-  return;
+  notice = await Joi.validate(notice, noticeSchema, { abortEarly: false });
+  notice.email = user.email;
+  return await new Notification(notice).save();
 }
 async function getLastNotices(user) {
   // todo add
