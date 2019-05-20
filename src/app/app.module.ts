@@ -18,6 +18,8 @@ import { HomeComponent } from './home/home.component';
 import {QuestionService} from './home/home.service';
 import {MomentModule} from 'ngx-moment';
 import {TopicComponent} from './home/topic.component';
+import {QuestionComponent} from './home/question.component';
+import {MatIconModule} from '@angular/material';
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import {TopicComponent} from './home/topic.component';
     AppComponent,
     HeaderComponent,
       TopicComponent,
+      QuestionComponent,
     HomeComponent,
   ],
   imports: [
@@ -35,6 +38,7 @@ import {TopicComponent} from './home/topic.component';
     SharedModule,
     AuthModule,
     AdminModule,
+      MatIconModule,
       MomentModule,
     AppRoutingModule,
   ],

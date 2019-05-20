@@ -4,7 +4,7 @@
 </div>
 <div *ngFor= "let question of Question" class="ui-block">
   <article class="hentry post">
-    <a class="h5" style="font-weight: bold; font:18px 'q_serif',Georgia,Times,'Times New Roman','Hiragino Kaku Gothic Pro','Meiryo',serif;" >{{question.title}}</a>
+    <a  [routerLink]="['question',question._id]" style="font-weight: bold; font:18px 'q_serif',Georgia,Times,'Times New Roman','Hiragino Kaku Gothic Pro','Meiryo',serif;" >{{question.title}}</a>
     <div *ngIf="question.answers.length != 0; else noAnswer">
     <div class="post__author author vcard inline-items">
       <img [src]="question.answers[0].picture"  height="48px" width="48px" class="img-responsive" alt="author">

@@ -1,0 +1,44 @@
+
+<div  class="ui-block">
+    <article class="hentry post">
+        <a class="h5" style="font-weight: bold; font:18px 'q_serif',Georgia,Times,'Times New Roman','Hiragino Kaku Gothic Pro','Meiryo',serif;" >{{Question.title}}</a>
+    <br>
+        <p>Answers {{Question.answers.length}}</p>
+        <hr>
+        <div *ngIf="Question.answers.length != 0; else noAnswer">
+            <div *ngFor="let answer of Question.answers">
+            <div class="post__author author vcard inline-items">
+                <img [src]="answer.picture"  height="48px" width="48px" class="img-responsive" alt="author">
+                <div>
+                    <p class="user">{{answer.username}}</p>
+
+                    <span class="answer">Answered {{answer.createdAt | amTimeAgo}}</span>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            {{answer.body}}
+                <div>
+                    <mat-icon >arrow_upward</mat-icon>
+                <span>Upvote</span>
+                <a>{{answer.upvote}}</a>
+                    <mat-icon >arrow_downward</mat-icon>
+
+                <span>Downvote</span>
+                    <a>{{answer.downvote}}</a>
+                </div>
+                <hr>
+
+        </div>
+        </div>
+        <ng-template #noAnswer>
+            <p>No Answer</p>
+        </ng-template>
+
+    </article>
+</div>
