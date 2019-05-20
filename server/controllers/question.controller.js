@@ -28,14 +28,13 @@ async function insert(question) {
 }
 
 async function getAll() {
-    return await Question.find({});
+    const project = {_id: 1, title: 1, topic: 1, createdAt:1, answers:1};
+    return await Question.find({}, project);
 }
 
 async function getById(id) {
   return await Question.findById(id);
 }
-
-
 
 //--------------- query answers
 

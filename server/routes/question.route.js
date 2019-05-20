@@ -12,6 +12,7 @@ router.route('/')
     .post(asyncHandler(insert))
     .get(asyncHandler(getAll));
 
+
 router.route('/:id')
     .get(asyncHandler(getById));
 router.route('/:id/answers')
@@ -20,6 +21,8 @@ router.route('/:id/answers/:answerId/upvote')
     .post(asyncHandler(upvoteAnswer));
 router.route('/:id/answers/:answerId/downvote')
     .post(asyncHandler(downvoteAnswer));
+
+
 
 async function insert(req, res) {
   // let user = req.user;
