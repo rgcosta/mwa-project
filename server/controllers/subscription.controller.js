@@ -8,7 +8,8 @@ const subscriptionSchema = Joi.object({
 
 module.exports = {
   insert,
-  remove
+  remove,
+  findAll
 }
 
 async function insert(sub,user) {
@@ -17,6 +18,10 @@ async function insert(sub,user) {
   return await new Subscription(subsc).save();
 }
 async function remove(token) {
+  console.log(token);
   const tokenDel = await Subscription.findOne({token: token});
-  return await topDel.remove();
+  return await tokenDel.remove();
+}
+async function findAll(user) {
+  return await Subscription.find({email: user.email});
 }

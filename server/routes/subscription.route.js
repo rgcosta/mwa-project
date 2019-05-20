@@ -17,6 +17,6 @@ async function insert(req, res) {
   res.json(sub);
 }
 async function remove(req, res) {
-  let sub = await subCtrl.remove(req.params.token);
+  let sub = await subCtrl.remove(req.body.token);
   res.json(sub);
 }
