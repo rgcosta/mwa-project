@@ -2,48 +2,46 @@
 
 <div class='row'>
   <div class='col-md-3'>
-    <div class="card">
-      <h3 style="padding-top:300px; padding-bottom:300px;">[Component: List of topics here]</h3>
-    </div>
+      <app-topic></app-topic>
   </div>
   <div class='col-md-6'>
-    <div class="card">
-      <h3 style="padding-top:300px; padding-bottom:700px;">[Component: List of last questions here!]</h3>
-    </div>
+
+
+
+      <div *ngFor= "let question of Question" class="ui-block">
+          <article class="hentry post">
+            <a class="h5" style="font-weight: bold; font:18px 'q_serif',Georgia,Times,'Times New Roman','Hiragino Kaku Gothic Pro','Meiryo',serif;" >{{question.title}}</a>
+            <div *ngIf="question.answers.length != 0; else noAnswer">
+            <div class="post__author author vcard inline-items">
+              <img [src]="question.answers[0].picture"  height="48px" width="48px" class="img-responsive" alt="author">
+              <div>
+              <p class="user">{{question.answers[0].username}}</p>
+        
+                <span class="answer">Answered {{question.createdAt}}</span>
+              </div>
+            </div>
+        
+        
+        
+        
+        
+        
+        
+            {{question.answers[0].body}}
+            </div>
+            <ng-template #noAnswer>
+                <p>No Answer</p>
+            </ng-template>
+        
+          </article>
+        </div>
+
+
+
+    
   </div>
   <div class='col-md-3'>
     <app-top5></app-top5>
   </div>
 </div>
 
-<div id="qnlink" class="m-link">
-  <h5> <a href="#" id="add-question"   target="">What is your question?
-  </a></h5>
-</div>
-<div *ngFor= "let question of Question" class="ui-block">
-  <article class="hentry post">
-    <a class="h5" style="font-weight: bold; font:18px 'q_serif',Georgia,Times,'Times New Roman','Hiragino Kaku Gothic Pro','Meiryo',serif;" >{{question.title}}</a>
-    <div *ngIf="question.answers.length != 0; else noAnswer">
-    <div class="post__author author vcard inline-items">
-      <img [src]="question.answers[0].picture"  height="48px" width="48px" class="img-responsive" alt="author">
-      <div>
-      <p class="user">{{question.answers[0].username}}</p>
-
-        <span class="answer">Answered {{question.createdAt | amTimeAgo}}</span>
-      </div>
-    </div>
-
-
-
-
-
-
-
-    {{question.answers[0].body}}
-    </div>
-    <ng-template #noAnswer>
-        <p>No Answer</p>
-    </ng-template>
-
-  </article>
-</div>

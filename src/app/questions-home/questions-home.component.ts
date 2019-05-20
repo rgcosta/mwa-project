@@ -12,7 +12,7 @@ import { MakeRequestService } from '../services/make-request.service';
 export class QuestionsHomeComponent implements OnInit {
 
   private label: string = 'questions';
-  private url: string = '/api/question';
+  private url: string = '/api/questions';
   private topic: string;
   private topics: any;
   private subscription: Subscription;
@@ -20,6 +20,7 @@ export class QuestionsHomeComponent implements OnInit {
 
   constructor(private router: ActivatedRoute, private service: MakeRequestService) {
     this.subscription = this.router.params.subscribe(param => {
+      this.topic = param.topic;
       param.topic ? this.getQuestions(param.topic) : this.getQuestions();        
     });
   }
@@ -33,10 +34,14 @@ export class QuestionsHomeComponent implements OnInit {
                       this.service.getCachedData(this.label).slice(0,5);
       }
     )
+
+    // this.topics = topic ?
+    //                   this.service.getCachedData(this.label).filter(data => data.topic == topic).slice(0,5) :
+    //                   this.service.getCachedData(this.label).slice(0,5);
   }
 
   ngOnInit() {
-    this.topic = this.router.snapshot.paramMap.get("topic");
+    //this.topic = this.router.snapshot.paramMap.get("topic");
   }
 
   ngOnDestroy(){

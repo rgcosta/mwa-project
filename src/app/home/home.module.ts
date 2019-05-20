@@ -4,18 +4,13 @@ import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routin.module';
 // This Module Components list:
 import { QuestionsHomeComponent } from '../questions-home/questions-home.component';
-import {MomentModule} from 'ngx-moment';
+import { TopicComponent } from '../topic/topic.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    HomeRoutingModule,
-    MomentModule
+    HomeRoutingModule
   ],
-  exports: [
-    HomeComponent,
-    QuestionsHomeComponent
-  ],
-  declarations: [ HomeComponent, QuestionsHomeComponent ]
+  declarations: [ HomeComponent, QuestionsHomeComponent, TopicComponent ]
 })
 export class HomeModule { }

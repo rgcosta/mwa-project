@@ -14,10 +14,10 @@ export class MakeRequestService {
   public setHeader: any;
 
   //Dummy data
-  public users: User[] = [
-    new User('John', 'Doodle', 'john.doodle@gmail.com', '../../assets/land.png', [''], [''], [''], false),
-    new User('Carl', 'Ross', 'carl.ross@gmail.com', '../../assets/land.png', [''], [''], [''], true)
-  ]
+  // public users: User[] = [
+  //   new User('John', 'Doodle', 'john.doodle@gmail.com', '../../assets/land.png', [''], [''], [''], false),
+  //   new User('Carl', 'Ross', 'carl.ross@gmail.com', '../../assets/land.png', [''], [''], [''], true)
+  // ]
   
   
   constructor(private http: HttpClient) {
@@ -27,7 +27,6 @@ export class MakeRequestService {
 
   // Will receive a observable, must .subscribe()
   getData(url: string){
-
     return this.http.get(url, this.setHeader);
   }
   postData(url: string, params: any){
@@ -45,14 +44,14 @@ export class MakeRequestService {
   }
 
   // Dummy - return local data as an Observable
-  getDataLocal(){
-    const usersObservable = new Observable(observer => {
-      setTimeout(() => {
-          observer.next(this.users[1]);
-      }, 0);
-    });
+  // getDataLocal(){
+  //   const usersObservable = new Observable(observer => {
+  //     setTimeout(() => {
+  //         observer.next(this.users[1]);
+  //     }, 0);
+  //   });
 
-    return usersObservable;
-  }
+  //   return usersObservable;
+  // }
 
 }

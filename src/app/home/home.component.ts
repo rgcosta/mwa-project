@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {QuestionService} from './home.service';
-import {MomentModule} from 'ngx-moment';
+import { MakeRequestService } from '../services/make-request.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +8,21 @@ import {MomentModule} from 'ngx-moment';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor(private question:QuestionService){}
-  private Question:any;
 
-
-
+  private url: string = '/api/questions';
+  private label: string = 'questions';
+  private topics: any;
+  private Question: any;
+  private subs: Subscription;
+  constructor(private service: MakeRequestService) {}
 
   ngOnInit() {
-this.question.getQuestions().subscribe(data=>{
-  console.log(data);
-  this.Question = data;
-});
-
+    this.subs = this.service.getData(this.url).subscribe(
+      data => {
+        localStorage.setItem(this.label, JSON.stringify(data));
+        this.Question = data;
+      }
+    )
   }
 
 }

@@ -1,0 +1,9 @@
+<div align="left">
+  <h3><b>Topics</b></h3>
+  <div>
+    <div class="topics" *ngFor="let topic of topics">
+        <i class="far fa-star text-info"></i>&nbsp;<a class="btn btn-outline-info" [routerLink]="topic.topic">{{topic.topic}}</a>
+    </div>
+  </div>
+</div>
+

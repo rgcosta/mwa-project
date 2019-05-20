@@ -580,8 +580,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Kramer\Desktop\project\mwa-project\src\styles.scss */"./src/styles.scss");
-module.exports = __webpack_require__(/*! C:\Users\Kramer\Desktop\project\mwa-project\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
+__webpack_require__(/*! C:\Users\Kramer\Desktop\5get-from-git\mwa-project\src\styles.scss */"./src/styles.scss");
+module.exports = __webpack_require__(/*! C:\Users\Kramer\Desktop\5get-from-git\mwa-project\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
 
 
 /***/ })
