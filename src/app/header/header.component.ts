@@ -12,7 +12,6 @@ import { useAnimation } from '@angular/animations';
 export class HeaderComponent implements OnInit {
 
   @Input() user: any = {};
-  public src: string = '../../assets/land.png';
 
   constructor(
     private authService: AuthService,

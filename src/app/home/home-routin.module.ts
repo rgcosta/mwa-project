@@ -3,16 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { AuthGuard } from '../auth/auth-guard.service'
 
-const routes: Routes = [{
-  path: '123',
-  component: HomeComponent,
-  canActivate: [AuthGuard]
-  
-}, {
-path: '456',
-  component: HomeComponent,
-  canActivate: [AuthGuard]
-}];
+const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

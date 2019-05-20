@@ -12,7 +12,7 @@ import { MakeRequestService } from '../services/make-request.service';
 export class QuestionsHomeComponent implements OnInit {
 
   private label: string = 'questions';
-  private url: string = '/api/question';
+  private url: string = '/api/questions';
   private topic: string;
   private topics: any;
   private subscription: Subscription;
@@ -34,6 +34,10 @@ export class QuestionsHomeComponent implements OnInit {
                       this.service.getCachedData(this.label).slice(0,5);
       }
     )
+
+    // this.topics = topic ?
+    //                   this.service.getCachedData(this.label).filter(data => data.topic == topic).slice(0,5) :
+    //                   this.service.getCachedData(this.label).slice(0,5);
   }
 
   ngOnInit() {

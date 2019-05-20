@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-//import { SetUserService } from '../services/set-user.service';
+import { MakeRequestService } from '../services/make-request.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() {}
+  private url: string = '/api/questions';
+  private label: string = 'questions';
+  private topics: any;
+  private Question: any;
+  private subs: Subscription;
+  constructor(private service: MakeRequestService) {}
 
   ngOnInit() {
+    this.subs = this.service.getData(this.url).subscribe(
+      data => {
+        localStorage.setItem(this.label, JSON.stringify(data));
+        this.Question = data;
+      }
+    )
   }
 
 }
