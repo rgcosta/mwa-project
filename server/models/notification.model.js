@@ -4,7 +4,7 @@ const NotificationSchema = new mongoose.Schema({
     email: String,
     title: String,
     body:String,
-    noticeLink:String,
+    click_action:String,
     createdAt: {
         type: Date,
         default: Date.now

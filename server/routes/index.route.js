@@ -18,7 +18,6 @@ router.use('/user', userRoutes);
 router.use('/questions', questionRoutes);
 router.use('/topics', topicRoutes);
 router.use('/profiles', profileRoutes);
-router.use('/notifications', profileRoutes);
+router.use('/notifications', notificationRoutes);
 router.use('/subscriptions', subscriptionRoutes);
-router.use('/notification', notificationRoutes);
 module.exports = router;
