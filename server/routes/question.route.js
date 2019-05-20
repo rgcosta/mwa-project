@@ -12,6 +12,7 @@ router.route('/')
     .post(asyncHandler(insert))
     .get(asyncHandler(getAll));
 
+
 router.route('/:id')
     .get(asyncHandler(getById));
 router.route('/:id/answers')
@@ -21,10 +22,12 @@ router.route('/:id/answers/:answerId/upvote')
 router.route('/:id/answers/:answerId/downvote')
     .post(asyncHandler(downvoteAnswer));
 
+
+
 async function insert(req, res) {
   // let user = req.user;
   // req.body.author = user.email;
-  let question = await questionCtrl.insert(req.body);
+  let question = await questionCtrl.insert(req.body, req.user);
   res.json(question);
 }
 

@@ -17,5 +17,6 @@ module.exports = {
 };
 
 async function getAllQuestions(topicName) {
-    return await Question.find({topic: topicName});
+    const project = {_id: 1, title: 1, topic: 1, createdAt:1, answers:1};
+    return await Question.find({topic: topicName}, project);
 }
