@@ -11,6 +11,7 @@ const noticeSchema = Joi.object({
 module.exports = {
   insert,
   getLastNotices,
+  push
 
 }
 
@@ -22,4 +23,9 @@ async function insert(notice, user) {
 async function getLastNotices(user) {
   // todo add
   return;
+}
+async function push(notice,user) {
+  notice = await insert(notice,user);
+
+  return notice;
 }

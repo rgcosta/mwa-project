@@ -9,11 +9,11 @@ module.exports = router;
 router.use(passport.authenticate('jwt', { session: false }))
 
 router.route('/')
-    .post(asyncHandler(insert))
+    .post(asyncHandler(push))
     .get(asyncHandler(getLastNotices));
 
-async function insert(req, res) {
-  let notice = await noticeCtrl.insert(req.body,req.user);
+async function push(req, res) {
+  let notice = await noticeCtrl.push(req.body,req.user);
   res.json(notice);
 }
 async function getLastNotices(req, res) {
