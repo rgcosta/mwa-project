@@ -27,7 +27,7 @@ router.route('/:id/answers/:answerId/downvote')
 async function insert(req, res) {
   // let user = req.user;
   // req.body.author = user.email;
-  let question = await questionCtrl.insert(req.body);
+  let question = await questionCtrl.insert(req.body, req.user);
   res.json(question);
 }
 
