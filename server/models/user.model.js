@@ -20,9 +20,10 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  roles: [{
+  roles: {
     type: String,
-  }]
+    default: 'user'
+  }
 }, {
   versionKey: false
 });
