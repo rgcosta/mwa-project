@@ -2,7 +2,6 @@ const Joi = require('joi');
 const Question = require('../models/question.model');
 const Profile = require('../models/profile.model');
 
-
 const questionSchema = Joi.object({
   title: Joi.string().required(),
   topic: Joi.string().required(),
@@ -56,11 +55,14 @@ async function addAnswer(id,answer){
 
 
 async function upvoteAnswer(id,answerId){
-  return await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.upvote": 1 }});
+  await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.upvote": 1 }},{"answers.$.upvote":1});
+  return await Question.findOne({_id:id,'answers._id':answerId});
+      // ,{'answers.$.upvote':1}
 }
 
 
 
 async function downvoteAnswer(id,answerId){
-  return await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.downvote": 1 }});
+   await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.downvote": 1 }});
+  return await Question.findOne({_id:id,'answers._id':answerId});
 }
