@@ -24,13 +24,19 @@
 
             {{answer.body}}
                 <div>
+                    <button mat-button  (click)="up( answer._id)" >
                     <mat-icon >arrow_upward</mat-icon>
                 <span>Upvote</span>
-                <a>{{answer.upvote}}</a>
+                        <span>{{answer.upvote}}</span>
+                    </button>
+
+                    <button mat-button (click)="down(answer._id)">
                     <mat-icon >arrow_downward</mat-icon>
 
                 <span>Downvote</span>
-                    <a>{{answer.downvote}}</a>
+                        <span>{{answer.downvote}}</span>
+                    </button>
+
                 </div>
                 <hr>
 
