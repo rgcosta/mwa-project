@@ -22,8 +22,10 @@ export class AppComponent implements OnInit {
   private userSubscription: Subscription;
   private subscription: Subscription;
   private reqSubscription: Subscription;
+  
   public user: any;
   private fullname: string;
+
   private requrl: string = 'api/topics';
   private topics: any;
 
@@ -42,7 +44,6 @@ export class AppComponent implements OnInit {
     this.registerSvgIcons();
     this.subscription = this.service.getData(this.requrl).subscribe(data =>{
       this.topics = data;
-      console.log(this.topics);
     })
   }
 

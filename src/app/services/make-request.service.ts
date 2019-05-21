@@ -18,6 +18,9 @@ export class MakeRequestService {
     // this.setHeader = {headers: this.header};
   }
 
+  getDataById(url: string, id: string){
+    return this.http.get(url + '/' + id);
+  }
   getData(url: string, params?: any){
     if(params) return this.http.get(url, params);
     return this.http.get(url);
