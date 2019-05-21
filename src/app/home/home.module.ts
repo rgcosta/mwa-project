@@ -12,5 +12,6 @@ import { TopicComponent } from '../topic/topic.component';
     HomeRoutingModule
   ],
   declarations: [ HomeComponent, QuestionsHomeComponent, TopicComponent ]
+  
 })
 export class HomeModule { }

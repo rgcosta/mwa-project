@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 
 import { MakeRequestService } from '../services/make-request.service';
 
@@ -11,42 +11,12 @@ import { MakeRequestService } from '../services/make-request.service';
 })
 export class QuestionsHomeComponent implements OnInit {
 
-  private label: string = 'questions';
-  private url: string = '/api/questions';
-  private topic: string;
-  private topics: any;
-  private subscription: Subscription;
-  private questionssubs: Subscription;
+  @Input() topics;
+  @Input() subject;
 
-  constructor(private router: ActivatedRoute, private service: MakeRequestService) {
-    this.subscription = this.router.params.subscribe(param => {
-      this.topic = param.topic;
-      param.topic ? this.getQuestions(param.topic) : this.getQuestions();        
-    });
-  }
-
-  getQuestions(topic?: any){
-    this.questionssubs = this.service.getData(this.url).subscribe(
-      data => {
-        localStorage.setItem(this.label, JSON.stringify(data));
-        this.topics = topic ?
-                      this.service.getCachedData(this.label).filter(data => data.topic == topic).slice(0,5) :
-                      this.service.getCachedData(this.label).slice(0,5);
-      }
-    )
-
-    // this.topics = topic ?
-    //                   this.service.getCachedData(this.label).filter(data => data.topic == topic).slice(0,5) :
-    //                   this.service.getCachedData(this.label).slice(0,5);
-  }
+  constructor() {  }
 
   ngOnInit() {
-    //this.topic = this.router.snapshot.paramMap.get("topic");
-  }
-
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-    this.questionssubs.unsubscribe();
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MakeRequestService } from '../services/make-request.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { MakeRequestService } from '../services/make-request.service';
 })
 export class TopicComponent implements OnInit {
 
+  @Input() subject: string;
   private Question: any;
 
   public topics: any = [{"topic":"Angular","picture":"../assets/land.png"},{"topic":"Server Side","picture":"../../assets/land.png"}];
