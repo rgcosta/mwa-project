@@ -6,7 +6,10 @@ import { Injectable } from '@angular/core';
 export class SetUserService {
   constructor() { }
 
-  getCachedData(data: string){
-    return JSON.parse(localStorage.getItem(data));
+  getCachedData(label: string){
+    return JSON.parse(localStorage.getItem(label));
+  }
+  setCachedData(label: string, obj: any){
+    localStorage.setItem(label, obj);
   }
 }

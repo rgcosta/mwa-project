@@ -1,18 +1,15 @@
 <div class="questions">
   <div align="center">
-      <h4><b>Top 5 {{topic}} Questions</b></h4>
+      <h5><b>Top 5 {{subject}} Questions</b></h5>
   </div>
   <div class='row'>
-    <div class='col'>
-      <div class="card" *ngFor="let question of topics">
+    <div class="col card big-card">
+      <div class="" *ngFor="let question of bytopics">
         <div class="card-body">
-          <h6 class="card-title text-truncate" title='{{ question.title }}'><b>{{ question.title }}</b></h6>
-          <p class="card-text text-muted">{{ question.createdAt | date }} <br> <i><b>{{ question.topic }}</b></i></p>
-          <div align="right">
-            <a href="#" class="card-link">More ...</a>
-            <a href="#" class="card-link">Follow <i class="far fa-bookmark"></i></a>
-          </div>
+          <a [routerLink]="['/', 'question', question._id]" class="text-info"><h6 class="card-title" title='{{ question.title }}'><b><i class="far fa-question-circle fa-lg"></i> {{ question.title }}</b></h6></a>
+          <p align="right" class="card-text text-muted">{{ question.createdAt | date }} <br> <i><b>{{ question.topic }}</b></i></p>
         </div>
       </div>
+    </div>
   </div>
 </div>
