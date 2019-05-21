@@ -9,9 +9,13 @@ module.exports = {
 };
 
 async function getAllQuestions(userId) {
-    const project = {_id: 1, title: 1, topic: 1, createdAt:1};
+    const project = {_id: 1, title: 1, topic: 1, createdAt:1, answers:1, status:1};
 
     let questionIds = await Profile.findOne({'user._id': new ObjectId(userId)}, {questions:1});
+
+    if (!questionIds) {
+        return JSON.parse('{"code": 404, "message": "No questions found for this user."}');
+    }
 
     let questions = [];
     let id = '';
