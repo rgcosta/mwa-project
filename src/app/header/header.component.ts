@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../auth/auth.service';
-import { useAnimation } from '@angular/animations';
 import {PushNotificationService} from '../services/push-notification.service';
 import {Subscription} from 'rxjs';
 
@@ -23,13 +22,10 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.user);
     if ( this.user ) {
       this.pushNotificationService.requestPermission();
       this.pushNotificationService.listen();
       this.subscription = this.pushNotificationService.currentNotice.subscribe(message => {
-        // const notifi = message.notification;
-        console.log(message);
         if (message) {
           this.messages.push(message);
         } else {
@@ -38,6 +34,11 @@ export class HeaderComponent implements OnInit {
         }
       });
     }
+  }
+  removeNotifi(i): void {
+    console.log(i);
+    this.messages.splice(i, 1);
+    console.log(this.messages);
   }
 
   async logout() {
