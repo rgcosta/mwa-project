@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
 
   public user: any;
   private fullname: string;
+  private email: string;
 
   private requrl: string = 'api/topics';
   private topics: any;
@@ -57,6 +58,7 @@ export class AppComponent implements OnInit {
       this.user = user;
       if(this.user){
         this.fullname = this.user.fullname;
+        this.email = this.user.email;
       }
     });
     
@@ -69,15 +71,26 @@ export class AppComponent implements OnInit {
   }
 
   addQuestion() {
+    console.log(this.questionForm.valid);
     if(!this.questionForm.valid) return;
-    let url = 'api/add/question'
+    let url = 'api/questions'
+    let created: any;
     let {
       newQuestion,
       topic,
     } = this.questionForm.getRawValue();
-    this.reqSubscription = this.service.postData(url, {newQuestion, topic})
+    let content = {
+      title: newQuestion,
+      author: this.email,
+      status: "open",
+      isPublic: true,
+      topic: topic
+    }
+    this.reqSubscription = this.service.postData(url, content)
                               .subscribe(data => {
-                                this.router.navigate(['home']);
+                                console.log(data);
+                                created = data;
+                                this.router.navigate(['/', 'question', created._id]);
                               });
   }
   

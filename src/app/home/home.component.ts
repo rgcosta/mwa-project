@@ -39,11 +39,18 @@ export class HomeComponent implements OnInit {
         localStorage.setItem(this.label, JSON.stringify(data));
         this.Question = data;
         this.items = this.subject ?
-                          this.Question.filter(data => data.topic == this.subject).slice(0,20) :
-                          this.Question.slice(0,20);
+                          this.Question.filter(data => data.topic == this.subject)
+                              .sort((a, b) => a.createdAt > b.createdAt ? -1 : 1)
+                              .slice(0,20) :
+                          this.Question.sort((a, b) => a.createdAt > b.createdAt ? -1 : 1)
+                              .slice(0,20);
+
         this.bytopics = this.subject ?
-                          this.Question.filter(data => data.topic == this.subject).slice(0,5) :
-                          this.Question.slice(0,5);
+                          this.Question.filter(data => data.topic == this.subject)
+                              .sort((a, b) => a.answers.length > b.answers.length ? -1 : 1)
+                              .slice(0,5) :
+                          this.Question.sort((a, b) => a.answers.length > b.answers.length  ? -1 : 1)
+                              .slice(0,5);
       }
     ); 
     
