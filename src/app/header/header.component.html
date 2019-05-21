@@ -23,7 +23,7 @@
                         </a>
                         <ul class="dropdown-menu">
 
-                            <li *ngFor="let message of messages"><a class="nav-link"  [routerLink]="['/']">{{message.notification.body}}</a></li>
+                            <li *ngFor="let message of messages; let i = index"><a class="nav-link" (click)="removeNotifi(i)"  routerLink="question/{{message.data['gcm.notification.questionId']}}">{{message.notification.body}}</a></li>
                             <!--<li><a class="nav-link" [routerLink]="['/']">Another action</a></li>-->
                             <!--<li><a class="nav-link" >test t</a></li>-->
                             <!--<li role="separator" class="divider"></li>-->

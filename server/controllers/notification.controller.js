@@ -6,7 +6,8 @@ const subCtrl = require('./subscription.controller');
 const noticeSchema = Joi.object({
   title: Joi.string().required(),
   click_action: Joi.string().required(),
-  body: Joi.string().required()
+  body: Joi.string().required(),
+  questionId:Joi.string().optional()
 });
 
 const headers = {
@@ -54,10 +55,11 @@ async function push(notice,email) {
     options.json.notification.title = notice.title;
     options.json.notification.body = notice.body;
     options.json.notification.click_action = notice.click_action;
+    options.json.notification.questionId=notice.questionId;
     options.json.to= sub.token;
     body = await request(options);
   }
 
-  insert(notice,user).then((data)=>console.log(data));
+  // insert(notice,user).then((data)=>console.log(data)).catch(err=>console.error(err));
   return subs;
 }
