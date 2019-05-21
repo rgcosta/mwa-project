@@ -290,7 +290,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<app-header *ngIf=\"user\" [user]=\"user\"></app-header>\r\n\r\n<div class=\"wrapper-app container\">\r\n  <router-outlet></router-outlet>\r\n</div>\r\n\r\n<footer>\r\n</footer>\r\n\r\n"
+module.exports = "\r\n<app-header *ngIf=\"user\" [user]=\"user\"></app-header>\r\n\r\n<div class=\"wrapper-app container\">\r\n  <router-outlet></router-outlet>\r\n</div>\r\n\r\n<div class=\"modal fade\" id=\"exampleModalCenter\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalCenterTitle\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h5 class=\"modal-title\"><i class=\"fas fa-plus\"></i> New Question</h5>\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        \r\n        <form [formGroup]=\"questionForm\">\r\n          <div class=\"form-group\">\r\n            <label for=\"newQuestion\"><b>{{fullname}} Asked:</b></label>\r\n            <textarea class=\"form-control\" name=\"newQuestion\" formControlName=\"newQuestion\" placeholder=\"Write your question here...\" rows=\"3\"></textarea>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"topic\">Select a topic</label>\r\n            <select class=\"form-control\" formControlName=\"topic\" name=\"topic\">\r\n              <option *ngFor=\"let topic of topics\">{{topic.title}}</option>\r\n            </select>\r\n          </div>\r\n        </form>\r\n\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\r\n        <button type=\"button\" class=\"btn btn-success\">Add Question</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<footer>\r\n</footer>\r\n\r\n"
 
 /***/ }),
 
@@ -301,7 +301,7 @@ module.exports = "\r\n<app-header *ngIf=\"user\" [user]=\"user\"></app-header>\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".modal-title {\n  color: #b10606; }\n"
 
 /***/ }),
 
@@ -319,7 +319,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
-/* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auth/auth.service */ "./src/app/auth/auth.service.ts");
+/* harmony import */ var _services_make_request_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/make-request.service */ "./src/app/services/make-request.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./auth/auth.service */ "./src/app/auth/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -334,13 +336,26 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(authService, router, domSanitizer, matIconRegistry) {
+    function AppComponent(authService, router, domSanitizer, matIconRegistry, service) {
+        var _this = this;
         this.authService = authService;
         this.router = router;
         this.domSanitizer = domSanitizer;
         this.matIconRegistry = matIconRegistry;
+        this.service = service;
+        this.requrl = 'api/topics';
+        this.questionForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormGroup"]({
+            newQuestion: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](''),
+            topic: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"]('')
+        });
         this.registerSvgIcons();
+        this.subscription = this.service.getData(this.requrl).subscribe(function (data) {
+            _this.topics = data;
+            console.log(_this.topics);
+        });
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -351,6 +366,7 @@ var AppComponent = /** @class */ (function () {
         // update this.user after login/register/logout
         this.userSubscription = this.authService.$userSource.subscribe(function (user) {
             _this.user = user;
+            _this.fullname = _this.user.fullname;
         });
     };
     AppComponent.prototype.logout = function () {
@@ -363,6 +379,9 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.ngOnDestroy = function () {
         if (this.userSubscription) {
             this.userSubscription.unsubscribe();
+        }
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
     };
     AppComponent.prototype.registerSvgIcons = function () {
@@ -410,10 +429,11 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")]
         }),
-        __metadata("design:paramtypes", [_auth_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
+        __metadata("design:paramtypes", [_auth_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatIconRegistry"]])
+            _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatIconRegistry"],
+            _services_make_request_service__WEBPACK_IMPORTED_MODULE_4__["MakeRequestService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -851,7 +871,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--mat-card class=\"example-card\">\r\n  <mat-card-header>\r\n    <mat-card-title>Register</mat-card-title>\r\n  </mat-card-header>\r\n  <mat-card-content>\r\n    <form class=\"example-form\">\r\n      <table cellspacing=\"0\" [formGroup]=\"userForm\">\r\n        <tr>\r\n          <td>\r\n            <mat-form-field>\r\n              <input matInput placeholder=\"Fullname\" formControlName=\"fullname\" name=\"fullname\" required>\r\n            </mat-form-field>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td>\r\n            <mat-form-field>\r\n              <input matInput placeholder=\"Email\" formControlName=\"email\" name=\"email\" required>\r\n              <mat-error *ngIf=\"email.invalid && email.errors.email\">Invalid email address</mat-error>\r\n            </mat-form-field>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td>\r\n            <mat-form-field>\r\n              <input matInput placeholder=\"Password\" formControlName=\"password\" type=\"password\" name=\"password\" required>\r\n            </mat-form-field>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td>\r\n            <mat-form-field>\r\n              <input matInput placeholder=\"Reapet Password\" formControlName=\"repeatPassword\" type=\"password\" name=\"repeatPassword\" required>\r\n              <mat-error *ngIf=\"repeatPassword.invalid && repeatPassword.errors.passwordMatch\">Password mismatch</mat-error>\r\n            </mat-form-field>\r\n          </td>\r\n        </tr>\r\n      </table>\r\n    </form>\r\n  </mat-card-content>\r\n  <mat-card-actions>\r\n    <button mat-raised-button (click)=\"register()\" color=\"primary\">Register</button>\r\n    <span>Allrady have an account ? <a [routerLink]=\"['/auth/login']\">login</a> here</span>\r\n  </mat-card-actions>\r\n</mat-card-->\r\n<div class=\"row\">\r\n    <div class=\"col-sm-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3\">\r\n      <div class=\"card\">\r\n        <div class=\"card-header\">\r\n          <h1 class=\"card-title\"><b>Sing up</b></h1>\r\n        </div>\r\n        <form class=\"example-form\" [formGroup]=\"userForm\">\r\n          <div class=\"card-body\">\r\n\r\n            <input class=\"form-control\" placeholder=\"Fullname\" formControlName=\"fullname\" name=\"fullname\" required>\r\n            <input class=\"form-control\" placeholder=\"Email\" formControlName=\"email\" name=\"email\" required>\r\n            <span class=\"invalid\" *ngIf=\"email.invalid && email.errors.email\"><i class=\"fas fa-exclamation-triangle\"></i> Invalid email address</span>\r\n            <input class=\"form-control\" placeholder=\"Password\" formControlName=\"password\" type=\"password\" name=\"password\" required>\r\n            <input class=\"form-control\" placeholder=\"Reapet Password\" formControlName=\"repeatPassword\" type=\"password\" name=\"repeatPassword\" required>\r\n            <span class=\"invalid\" *ngIf=\"repeatPassword.invalid && repeatPassword.errors.passwordMatch\"><i class=\"fas fa-exclamation-triangle\"></i> Password mismatch</span>\r\n            <div align=\"right\">\r\n              <br>\r\n              <p class=\"card-text\">Allrady have an account? <a [routerLink]=\"['/auth/login']\">login here</a></p>\r\n            </div>\r\n          </div>\r\n          <div class=\"card-footer text-muted\" align=\"right\">\r\n            <span (click)=\"register()\" class=\"btn btn-primary\">Sign up</span>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>"
+module.exports = "\r\n<div class=\"row\">\r\n    <div class=\"col-sm-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3\">\r\n      <div class=\"card\">\r\n        <div class=\"card-header\">\r\n          <h1 class=\"card-title\"><b>Sing up</b></h1>\r\n        </div>\r\n        <form class=\"example-form\" [formGroup]=\"userForm\">\r\n          <div class=\"card-body\">\r\n\r\n            <input class=\"form-control\" placeholder=\"Fullname\" formControlName=\"fullname\" name=\"fullname\" required>\r\n            <input class=\"form-control\" placeholder=\"Email\" formControlName=\"email\" name=\"email\" required>\r\n            <span class=\"invalid\" *ngIf=\"email.invalid && email.errors.email\"><i class=\"fas fa-exclamation-triangle\"></i> Invalid email address</span>\r\n            <input class=\"form-control\" placeholder=\"Password\" formControlName=\"password\" type=\"password\" name=\"password\" required>\r\n            <input class=\"form-control\" placeholder=\"Reapet Password\" formControlName=\"repeatPassword\" type=\"password\" name=\"repeatPassword\" required>\r\n            <span class=\"invalid\" *ngIf=\"repeatPassword.invalid && repeatPassword.errors.passwordMatch\"><i class=\"fas fa-exclamation-triangle\"></i> Password mismatch</span>\r\n            <div align=\"right\">\r\n              <br>\r\n              <p class=\"card-text\">Allrady have an account? <a [routerLink]=\"['/auth/login']\">login here</a></p>\r\n            </div>\r\n          </div>\r\n          <div class=\"card-footer text-muted\" align=\"right\">\r\n            <span (click)=\"register()\" class=\"btn btn-primary\">Sign up</span>\r\n          </div>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>"
 
 /***/ }),
 
@@ -1002,7 +1022,7 @@ var TokenStorage = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<header>\r\n    <nav *ngIf=\"user\" class=\"navbar navbar-expand-lg navbar-light bg-light justify-content-between\">\r\n        <div class=\"container\">\r\n\r\n            <a class=\"navbar-brand\" [routerLink]=\"['/']\" >\r\n                <h1 class=\"card-title title\"><b> Quora</b></h1>\r\n            </a>\r\n            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n                <span class=\"navbar-toggler-icon\"></span>\r\n            </button>\r\n            <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n                <ul class=\"navbar-nav mr-auto\">\r\n                    <li class=\"nav-item active\">\r\n                        <a class=\"nav-link\" [routerLink]=\"['/']\"><i class=\"fa fa-home\"></i> Home</a>\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        <a class=\"nav-link\" [routerLink]=\"['/']\"><i class=\"fas fa-user-friends\"></i> OurTeam</a>\r\n                    </li>\r\n                </ul>\r\n                <form class=\"form-inline my-2 my-lg-0\">\r\n                    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search Question\" aria-label=\"Search\">\r\n                    <button class=\"btn btn-light\"><i class=\"fa fa-search\"></i></button>\r\n                </form>\r\n                \r\n                <ul class=\"navbar-nav ml-auto\">\r\n                        <span class=\"nav-link\">{{user.fullname}}</span>&nbsp;\r\n                    <li class=\"avatar-profile d-none d-sm-block \">\r\n                        <a class=\"dropdown-toggle\"  data-toggle=\"dropdown\" >\r\n                            <i class=\"fas fa-user-circle text-muted\" style=\"font-size: 42px;\"></i>\r\n                        </a>\r\n                        <div class=\"nav navbar-nav\">\r\n                            <div class=\"dropdown\">\r\n                                <div class=\"dropdown-menu\">\r\n                                    <a href=\"#\" class=\"dropdown-item\"><i class=\"far fa-user-circle\"></i> Profile</a>\r\n                                    <div class=\"dropdown-divider\"></div>\r\n                                    <a (click)=\"logout()\" class=\"dropdown-item out\"><i class=\"fas fa-sign-out-alt\"></i> Sign Out</a>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </li>\r\n                    <li>\r\n                        &nbsp;\r\n                        &nbsp;\r\n                        \r\n                    </li>\r\n                </ul>\r\n                <a href=\"#\" id=\"add-question\" class=\"btn btn-sm btn-outline-success\">Add Question</a>\r\n            </div>\r\n        </div>\r\n    </nav>\r\n</header>"
+module.exports = "\r\n<header>\r\n    <nav *ngIf=\"user\" class=\"navbar navbar-expand-lg navbar-light bg-light justify-content-between\">\r\n        <div class=\"container\">\r\n\r\n            <a class=\"navbar-brand\" [routerLink]=\"['/']\" >\r\n                <h1 class=\"card-title title\"><b> Quora</b></h1>\r\n            </a>\r\n            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n                <span class=\"navbar-toggler-icon\"></span>\r\n            </button>\r\n            <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n                <ul class=\"navbar-nav mr-auto\">\r\n                    <li class=\"nav-item active\">\r\n                        <a class=\"nav-link\" [routerLink]=\"['/']\"><i class=\"fa fa-home\"></i> Home</a>\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        <a class=\"nav-link\" [routerLink]=\"['/']\"><i class=\"fas fa-user-friends\"></i> OurTeam</a>\r\n                    </li>\r\n                </ul>\r\n                <form class=\"form-inline my-2 my-lg-0\">\r\n                    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search Question\" aria-label=\"Search\">\r\n                    <button class=\"btn btn-light\"><i class=\"fa fa-search\"></i></button>\r\n                </form>\r\n                \r\n                <ul class=\"navbar-nav ml-auto\">\r\n                        <span class=\"nav-link\">{{user.fullname}}</span>&nbsp;\r\n                    <li class=\"avatar-profile d-none d-sm-block \">\r\n                        <a class=\"dropdown-toggle\"  data-toggle=\"dropdown\" >\r\n                            <i class=\"fas fa-user-circle text-muted\" style=\"font-size: 42px;\"></i>\r\n                        </a>\r\n                        <div class=\"nav navbar-nav\">\r\n                            <div class=\"dropdown\">\r\n                                <div class=\"dropdown-menu\">\r\n                                    <a href=\"#\" class=\"dropdown-item\"><i class=\"far fa-user-circle\"></i> Profile</a>\r\n                                    <div class=\"dropdown-divider\"></div>\r\n                                    <a (click)=\"logout()\" class=\"dropdown-item out\"><i class=\"fas fa-sign-out-alt\"></i> Sign Out</a>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </li>\r\n                    <li>\r\n                        &nbsp;\r\n                        &nbsp;\r\n                        \r\n                    </li>\r\n                </ul>\r\n                <a href=\"#\" id=\"add-question\" class=\"btn btn-sm btn-outline-success\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">Add Question</a>\r\n            </div>\r\n        </div>\r\n    </nav>\r\n</header>"
 
 /***/ }),
 
@@ -1049,7 +1069,6 @@ var HeaderComponent = /** @class */ (function () {
         this.user = {};
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        console.log(this.user);
     };
     HeaderComponent.prototype.logout = function () {
         this.authService.signOut();
@@ -1140,6 +1159,70 @@ var CatchErrorInterceptor = /** @class */ (function () {
         });
     };
     return CatchErrorInterceptor;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/make-request.service.ts":
+/*!**************************************************!*\
+  !*** ./src/app/services/make-request.service.ts ***!
+  \**************************************************/
+/*! exports provided: MakeRequestService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MakeRequestService", function() { return MakeRequestService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var MakeRequestService = /** @class */ (function () {
+    //Dummy data
+    // public users: User[] = [
+    //   new User('John', 'Doodle', 'john.doodle@gmail.com', '../../assets/land.png', [''], [''], [''], false),
+    //   new User('Carl', 'Ross', 'carl.ross@gmail.com', '../../assets/land.png', [''], [''], [''], true)
+    // ]
+    function MakeRequestService(http) {
+        this.http = http;
+        this.header = new Headers();
+        this.header.append('Content-Type', 'application/json');
+        this.setHeader = { headers: this.header };
+    }
+    // Will receive a observable, must .subscribe()
+    MakeRequestService.prototype.getData = function (url) {
+        return this.http.get(url, this.setHeader);
+    };
+    MakeRequestService.prototype.postData = function (url, params) {
+        return this.http.post(url, this.setHeader);
+    };
+    MakeRequestService.prototype.updateData = function (url, params) {
+        return this.http.put(url, this.setHeader);
+    };
+    MakeRequestService.prototype.deleteData = function (url, params) {
+        return this.http.delete(url, this.setHeader);
+    };
+    MakeRequestService.prototype.getCachedData = function (item) {
+        return JSON.parse(localStorage.getItem(item));
+    };
+    MakeRequestService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], MakeRequestService);
+    return MakeRequestService;
 }());
 
 

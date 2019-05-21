@@ -2,7 +2,7 @@
 
 <div class='row'>
   <div class='col-sm-12 col-md-2'>
-      <app-topic [subject]="subject"></app-topic>
+      <app-topic [topics]="topics" [subject]="subject"></app-topic>
   </div>
   <div class='col-md-7'>
       <div *ngFor= "let question of items" class="card multi-cards">
@@ -44,7 +44,7 @@
       </div>
   </div>
   <div class='col-md-3'>
-    <app-top5 [topics]="topics" [subject]="subject"></app-top5>
+    <app-top5 [bytopics]="bytopics" [subject]="subject"></app-top5>
   </div>
 </div>
 

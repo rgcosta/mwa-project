@@ -4,9 +4,9 @@
   </div>
   <div class='row'>
     <div class="col card">
-      <div class="" *ngFor="let question of topics">
+      <div class="" *ngFor="let question of bytopics">
         <div class="card-body">
-          <a [routerLink]="[question._id]"><h6 class="card-title text-truncate" title='{{ question.title }}'><b>{{ question.title }}</b></h6></a>
+          <a [routerLink]="[question._id]"><h6 class="card-title" title='{{ question.title }}'><b>{{ question.title }}</b></h6></a>
           <p align="right" class="card-text text-muted">{{ question.createdAt | date }} <br> <i><b>{{ question.topic }}</b></i></p>
         </div>
       </div>

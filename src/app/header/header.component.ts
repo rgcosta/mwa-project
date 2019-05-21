@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.user);
   }
 
   logout(): void {

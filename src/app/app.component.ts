@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { SetUserService } from './services/set-user.service';
 import { MakeRequestService } from './services/make-request.service'
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 import { AuthService } from './auth/auth.service';
@@ -18,18 +19,30 @@ import * as schema from './schema/equipment.json';
 })
 export class AppComponent implements OnInit {
 
-  // Dummy Test
   private userSubscription: Subscription;
+  private subscription: Subscription;
   public user: any;
+  private fullname: string;
+  private requrl: string = 'api/topics';
+  private topics: any;
+
+  questionForm = new FormGroup({
+    newQuestion: new FormControl(''),
+    topic: new FormControl('')
+  })
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private domSanitizer: DomSanitizer,
-    private matIconRegistry: MatIconRegistry
+    private matIconRegistry: MatIconRegistry,
+    private service: MakeRequestService
   ) {
     this.registerSvgIcons();
-
+    this.subscription = this.service.getData(this.requrl).subscribe(data =>{
+      this.topics = data;
+      console.log(this.topics);
+    })
   }
 
   public ngOnInit() {
@@ -42,6 +55,7 @@ export class AppComponent implements OnInit {
     // update this.user after login/register/logout
     this.userSubscription = this.authService.$userSource.subscribe((user) => {
       this.user = user;
+      this.fullname = this.user.fullname;
     });
     
   }
@@ -58,6 +72,9 @@ export class AppComponent implements OnInit {
   ngOnDestroy() { 
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
+    }
+    if(this.subscription){
+      this.subscription.unsubscribe();
     }
   }
 

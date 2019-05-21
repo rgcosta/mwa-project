@@ -11,7 +11,7 @@ import { MakeRequestService } from '../services/make-request.service';
 })
 export class QuestionsHomeComponent implements OnInit {
 
-  @Input() topics;
+  @Input() bytopics;
   @Input() subject;
 
   constructor() {  }

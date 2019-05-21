@@ -11,10 +11,12 @@ import { AuthService } from '../auth/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  private url: string = '/api/questions';
+  private urlQuestions: string = '/api/questions';
+  private urlTopics: string = '/api/topics';
   private label: string = 'questions';
 
   private subject: string;
+  private bytopics: any;
   private topics: any;
   
   private Question: any;
@@ -26,14 +28,20 @@ export class HomeComponent implements OnInit {
       this.subject = param.topic;      
     });
 
-    this.subscription = this.service.getData(this.url).subscribe(
+    this.subscription = this.service.getData(this.urlTopics).subscribe(
+      data => {
+        this.topics = data;
+      }
+    )
+
+    this.subscription = this.service.getData(this.urlQuestions).subscribe(
       data => {
         localStorage.setItem(this.label, JSON.stringify(data));
         this.Question = data;
         this.items = this.subject ?
                           this.Question.filter(data => data.topic == this.subject).slice(0,20) :
                           this.Question.slice(0,20);
-        this.topics = this.subject ?
+        this.bytopics = this.subject ?
                           this.Question.filter(data => data.topic == this.subject).slice(0,5) :
                           this.Question.slice(0,5);
       }
