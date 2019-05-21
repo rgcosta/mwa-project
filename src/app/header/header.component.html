@@ -24,11 +24,11 @@
                         <ul class="dropdown-menu">
                             <li><a class="nav-link" [routerLink]="['/']">Action</a></li>
                             <li><a class="nav-link" [routerLink]="['/']">Another action</a></li>
-                            <li><a class="nav-link" [routerLink]="['/']">Something else here</a></li>
+                            <li><a class="nav-link" >test t</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a class="nav-link" [routerLink]="['/']">Separated link</a></li>
+                            <li><a class="nav-link" (click)="pushNotificationService.requestPermission()"> let us send you notifications</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a class="nav-link" [routerLink]="['home']">One more separated link</a></li>
+                            <li><a class="nav-link" (click)="pushNotificationService.unsubscribe()">Delete my token</a></li>
                         </ul>
                     </li>
                 </ul>

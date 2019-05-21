@@ -22,8 +22,8 @@ const options = {
     "notification": {
       "title": "Title",
       "body": "body",
-      "click_action" : "http://localhost:3000/",
-      "icon": "http://localhost:3000/icon.png"
+      "click_action" : "http://localhost:4040/",
+      "icon": "http://localhost:4040/logo.png"
     },
     "to" : "receiverToken"
   }

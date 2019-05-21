@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../auth/auth.service';
 import { useAnimation } from '@angular/animations';
+import {PushNotificationService} from '../services/push-notification.service';
 
 @Component({
   selector: 'app-header',
@@ -12,17 +13,23 @@ import { useAnimation } from '@angular/animations';
 export class HeaderComponent implements OnInit {
 
   @Input() user: any = {};
-
+  message;
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router ,
+    protected pushNotificationService: PushNotificationService
   ) { }
 
   ngOnInit() {
     console.log(this.user);
+    if ( this.user ) {
+      this.pushNotificationService.requestPermission();
+      this.pushNotificationService.listen();
+    }
   }
 
-  logout(): void {
+  async logout() {
+    await this.pushNotificationService.unsubscribe();
     this.authService.signOut();
     this.navigate('/auth/login');
   }
