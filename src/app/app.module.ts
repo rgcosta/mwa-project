@@ -17,22 +17,32 @@ import { HomeModule } from './home/home.module';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HeaderComponent } from './header/header.component';
+
 import {PushNotificationService} from './services/push-notification.service';
+import {MomentModule} from 'ngx-moment';
+import {QuestionComponent} from './home/question.component';
+import {QuestionService} from './services/home.service';
+import {MatButtonModule, MatIconModule} from '@angular/material';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    QuestionComponent,
+    HeaderComponent,
+    //HomeComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig, 'mwa quaro'),
     AngularFireMessagingModule,
     BrowserModule,
+      MomentModule,
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
+      MatButtonModule,
+      MatIconModule,
     SharedModule,
     AuthModule,
     AdminModule,
@@ -47,7 +57,7 @@ import {PushNotificationService} from './services/push-notification.service';
     provide: HTTP_INTERCEPTORS,
     useClass: CatchErrorInterceptor,
     multi: true,
-  }, PushNotificationService ],
+  }, PushNotificationService, QuestionService],
   entryComponents: [],
   bootstrap: [AppComponent]
 })

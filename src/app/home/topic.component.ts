@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {QuestionService} from './home.service';
+import {QuestionService} from '../services/home.service';
+
 @Component({
     selector: 'app-topic',
     template: ` <div *ngFor="let topics of topic">
@@ -13,7 +14,7 @@ import {QuestionService} from './home.service';
 `
 
     ,
-    styleUrls: ['./home.component.scss']
+    styleUrls: ['./home.component.css']
 })
 export class TopicComponent implements OnInit {
     constructor(private question:QuestionService){}

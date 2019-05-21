@@ -2,8 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { HomeComponent } from '../home/home.component';
+import {QuestionComponent} from '../home/question.component';
 
-const routes: Routes = [{
+const routes: Routes = [ {
+  path: 'question/:id',
+  component: QuestionComponent
+},{
   path: 'home',
   component: HomeComponent
 }, {
@@ -18,6 +22,11 @@ const routes: Routes = [{
 }, {
   path: 'admin',
   loadChildren: 'app/admin/admin.module#AdminModule'
+}, {
+  path: 'profile',
+  loadChildren: 'app/profile/profile.module#ProfileModule'
+  // canActivate: [AuthGuard],
+
 }, {
   path: '**',
   redirectTo: 'home'
