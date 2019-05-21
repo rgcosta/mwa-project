@@ -8,12 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 export class QuestionsBodyComponent implements OnInit {
 
   @Input() question: any;
-  @Input() fullname: any;
+  @Input() user: any;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.fullname);
+    console.log(this.user.email);
   }
 
 }

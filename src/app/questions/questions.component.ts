@@ -42,7 +42,7 @@ export class QuestionsComponent implements OnInit {
 }
 
   ngOnInit() {
-    this.fullname = this.userService.getCachedData('user');
+    this.user = this.userService.getCachedData('user');
   }
 
   ngOnDestroy(){
