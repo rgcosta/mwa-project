@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-lg-9">
+
+      <div class="row">
+
+        <div class="col-lg-12">
+          <!--User Question post block-->
+          <div class="ui-block">
+
+
+            <article class="hentry post">
+
+              <div class="post__author author vcard inline-items">
+                <img src="./assets/profile.png" style="height: 100px; width: 100px;" class="img-responsive" alt="author">
+                <div class="author-date">
+                  <a class="h6 post__author-name fn" href="#" >Author name</a>
+                  <div class="post__date">
+                    <time class="published" datetime="2004-07-24T18:18">
+
+                    </time>
+                  </div>
+                </div>
+
+              </div>
+
+              <div id="qnlink" class="m-link">
+
+
+
+              </div>
+
+
+            </article>
+          </div><!--End of ask question block-->
+        </div>
+      </div><!--End of row-->
+
+      <div class="row">
+
+        <div class="col-lg-4">
+          <div class=" aff-right">
+            <div class="ui-block" style="border-style: none;">
+              <hr>
+              <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link " data-toggle="pill" [routerLink]="['']" (click)="isInfo = !isInfo">Information 2</a>
+                <a class="nav-link " data-toggle="pill" [routerLink]="['myquestions']" (click)="isInfo = !isInfo">AAa</a>
+                <a class="nav-link" data-toggle="pill" href="#">BB</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-8">
+          <div class=" aff-right">
+            <div class="ui-block" style="border-style: none;">
+              <div *ngIf="isInfo; else otherItems">
+                Info is True
+              </div>
+              <ng-template #otherItems>
+
+              </ng-template>
+              <router-outlet></router-outlet>
+
+            </div>
+
+
+
+          </div>
+        </div>
+        <!-- /.col-lg-3 -->
+      </div><!--End of row--->
+
+
+    </div><!--End of col-lg-7-->
+
+
+
+
+
+    <!-- /.col-lg-6 -->
+    <!--col-lg-3-->
+    <!-- /.col-lg-3 -->
+  </div>
+</div>
