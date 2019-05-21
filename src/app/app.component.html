@@ -1,6 +1,8 @@
 
 <app-header *ngIf="user" [user]="user"></app-header>
 
+<a href="#" *ngIf="user" (click)="getTopics()" class="btn btn-sm btn-outline-success addQuestion" data-toggle="modal" data-target="#addQuestion">Add Question</a>
+  
 <div class="wrapper-app container">
   <router-outlet></router-outlet>
 </div>

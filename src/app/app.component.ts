@@ -43,9 +43,6 @@ export class AppComponent implements OnInit {
     private userService: SetUserService
   ) {
     this.registerSvgIcons();
-    this.subscription = this.service.getData(this.requrl).subscribe(data =>{
-      this.topics = data;
-    })
   }
 
   public ngOnInit() {
@@ -60,10 +57,15 @@ export class AppComponent implements OnInit {
       this.user = user;
       if(this.user){
         this.fullname = this.user.fullname;
-        //this.userService.getCachedData();
       }
     });
     
+  }
+
+  getTopics(){
+    this.subscription = this.service.getData(this.requrl).subscribe(data =>{
+      this.topics = data;
+    });
   }
 
   addQuestion() {
