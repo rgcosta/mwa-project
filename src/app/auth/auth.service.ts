@@ -47,7 +47,8 @@ export class AuthService {
     if (user) user.isAdmin = (user.roles.indexOf('admin') > -1);
     this.$userSource.next(user);
     (<any>window).user = user;
-    localStorage.setItem('user', (<any>window).user);
+    console.log(user.email);
+    localStorage.setItem('user', JSON.stringify({id: user._id, fullname: user.fullname, email: user.email, isAdmin: user.isAdmin}));
   }
 
   getUser(): Observable<any> {

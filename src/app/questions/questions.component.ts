@@ -14,19 +14,22 @@ export class QuestionsComponent implements OnInit {
 
   private url: string = '/api/questions';
   private questions: string;
+  private fullname: string;
+
   private question: any;
-  //private user
+  private user: any;
+
   private isOwner: boolean;
   private subscription: Subscription; 
   private reqSubscription: Subscription;
+  private userSubscription: Subscription;
 
   constructor(
     private service: MakeRequestService,
     private userService: SetUserService,
     private router: ActivatedRoute, 
-    private auth: AuthService) {
+    private authService: AuthService) {
 
-    
     this.subscription = this.router.params.subscribe(param => {
       this.questions = param.target; 
     });
@@ -39,6 +42,7 @@ export class QuestionsComponent implements OnInit {
 }
 
   ngOnInit() {
+    this.fullname = this.userService.getCachedData('user');
   }
 
   ngOnDestroy(){

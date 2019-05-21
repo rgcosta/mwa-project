@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   private userSubscription: Subscription;
   private subscription: Subscription;
   private reqSubscription: Subscription;
-  
+
   public user: any;
   private fullname: string;
 
@@ -39,7 +39,8 @@ export class AppComponent implements OnInit {
     private router: Router,
     private domSanitizer: DomSanitizer,
     private matIconRegistry: MatIconRegistry,
-    private service: MakeRequestService
+    private service: MakeRequestService,
+    private userService: SetUserService
   ) {
     this.registerSvgIcons();
     this.subscription = this.service.getData(this.requrl).subscribe(data =>{
@@ -59,6 +60,7 @@ export class AppComponent implements OnInit {
       this.user = user;
       if(this.user){
         this.fullname = this.user.fullname;
+        //this.userService.getCachedData();
       }
     });
     

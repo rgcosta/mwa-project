@@ -8,10 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 export class QuestionsBodyComponent implements OnInit {
 
   @Input() question: any;
-  
+  @Input() fullname: any;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.fullname);
   }
 
 }

@@ -2,7 +2,7 @@
   <h5><b>Topics</b></h5>
   <div>
     <div class="topics" *ngFor="let topic of topics">
-        <i class="far fa-star text-info"></i>&nbsp;<a class="btn btn-outline-info" [routerLink]="[topic.title]">{{topic.title}}</a>
+        <a class="btn btn-outline-info" [routerLink]="[topic.title]">{{topic.title}}</a>
     </div>
   </div>
 </div>
