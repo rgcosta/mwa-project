@@ -23,6 +23,11 @@ const routes: Routes = [ {
   path: 'admin',
   loadChildren: 'app/admin/admin.module#AdminModule'
 }, {
+  path: 'profile',
+  loadChildren: 'app/profile/profile.module#ProfileModule'
+  // canActivate: [AuthGuard],
+
+}, {
   path: '**',
   redirectTo: 'home'
 }];
