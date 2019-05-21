@@ -16,19 +16,27 @@ import { HomeModule } from './home/home.module';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HeaderComponent } from './header/header.component';
+import {MomentModule} from 'ngx-moment';
+import {QuestionComponent} from './home/question.component';
+import {QuestionService} from './services/home.service';
+import {MatButtonModule, MatIconModule} from '@angular/material';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+      QuestionComponent,
     HeaderComponent,
     //HomeComponent
   ],
   imports: [
     BrowserModule,
+      MomentModule,
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
+      MatButtonModule,
+      MatIconModule,
     SharedModule,
     AuthModule,
     AdminModule,
@@ -43,7 +51,7 @@ import { HeaderComponent } from './header/header.component';
     provide: HTTP_INTERCEPTORS,
     useClass: CatchErrorInterceptor,
     multi: true,
-  }],
+  }, QuestionService],
   entryComponents: [],
   bootstrap: [AppComponent]
 })
