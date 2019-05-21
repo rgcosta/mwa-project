@@ -6,7 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { SetUserService } from './services/set-user.service';
 import { MakeRequestService } from './services/make-request.service'
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
 
 
 import { AuthService } from './auth/auth.service';
@@ -21,15 +21,16 @@ export class AppComponent implements OnInit {
 
   private userSubscription: Subscription;
   private subscription: Subscription;
+  private reqSubscription: Subscription;
   public user: any;
   private fullname: string;
   private requrl: string = 'api/topics';
   private topics: any;
 
   questionForm = new FormGroup({
-    newQuestion: new FormControl(''),
-    topic: new FormControl('')
-  })
+    newQuestion: new FormControl('', [Validators.required]),
+    topic: new FormControl('', [Validators.required])
+  });
 
   constructor(
     private authService: AuthService,
@@ -55,9 +56,24 @@ export class AppComponent implements OnInit {
     // update this.user after login/register/logout
     this.userSubscription = this.authService.$userSource.subscribe((user) => {
       this.user = user;
-      this.fullname = this.user.fullname;
+      if(this.user){
+        this.fullname = this.user.fullname;
+      }
     });
     
+  }
+
+  addQuestion() {
+    if(!this.questionForm.valid) return;
+    let url = 'api/add/question'
+    let {
+      newQuestion,
+      topic,
+    } = this.questionForm.getRawValue();
+    this.reqSubscription = this.service.postData(url, {newQuestion, topic})
+                              .subscribe(data => {
+                                this.router.navigate(['home']);
+                              });
   }
 
   logout(): void {
@@ -75,6 +91,9 @@ export class AppComponent implements OnInit {
     }
     if(this.subscription){
       this.subscription.unsubscribe();
+    }
+    if(this.reqSubscription){
+      this.reqSubscription.unsubscribe();
     }
   }
 

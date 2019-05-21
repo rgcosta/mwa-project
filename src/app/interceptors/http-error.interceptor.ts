@@ -10,6 +10,7 @@ export class CatchErrorInterceptor implements HttpInterceptor {
       .handle(request)
       .do 
         ((event : HttpEvent < any >) => {}, (err : any) => {
+          console.log("REQUEST INTERSEPTED!!");
           if (err instanceof HttpErrorResponse) {
             let text = (err.error && err.error.message) ? err.error.message : err.statusText;
             (<any>window).globalEvents.emit('open error dialog', text);
