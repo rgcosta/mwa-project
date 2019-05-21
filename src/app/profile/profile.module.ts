@@ -8,7 +8,7 @@ import { ProfileInfoComponent } from './profile-info/profile-info.component';
   imports: [
     CommonModule, RouterModule.forChild([
       {path: '', component: ProfileComponent},
-      {path: 'myquestions', component: ProfileInfoComponent}
+      {path: ':myquestions', component: ProfileComponent}
     ])
   ],
   declarations: [ProfileComponent, ProfileInfoComponent]
