@@ -1,0 +1,33 @@
+a{
+    font-weight: bold; 
+    font: 18px 'q_serif',Georgia,Times,'Times New Roman','Hiragino Kaku Gothic Pro','Meiryo',serif;
+    cursor: pointer;
+    color: black;
+}
+
+.card {
+    box-shadow: 0px 1px 0px 0 rgba(20, 20, 20, 0.1);
+    border: 1px solid rgba(20,20,20,0.1);
+}
+
+.multi-cards{
+    margin:2px;
+    padding:10px;
+}
+
+.answer-topic{
+    margin-top: -40px;
+}
+
+.answer-body{
+    font: 20px 'q_serif',Georgia,Times,'Times New Roman','Hiragino Kaku Gothic Pro','Meiryo',serif;
+    padding: 10px;
+}
+
+.updated{
+    font-size: 14px;
+}
+.username{
+    font-size: 20px;
+    margin:5px;
+}

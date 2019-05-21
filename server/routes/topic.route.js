@@ -17,6 +17,11 @@ router.route('/:name')
     .get(asyncHandler(getAllQuestions));
 
 async function insert(req, res) {
+    if (req.user.role !== 'admin') {
+        res.json({msg: 'Unauthorized! For admin only.'});
+        return;
+    }
+
     const topic = await topicCtrl.insert(req.body);
     res.status(200).json(topic);
 }
