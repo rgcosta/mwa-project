@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register(fullname, email, password, repeatPassword)
     .subscribe(data => {
-      this.router.navigate(['']);
+      this.router.navigate(['home']);
     })
   }
 

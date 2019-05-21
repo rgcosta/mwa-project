@@ -11,35 +11,31 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { AuthHeaderInterceptor } from './interceptors/header.interceptor';
 import { CatchErrorInterceptor } from './interceptors/http-error.interceptor';
+//import { HomeComponent } from './home/home.component';
+import { HomeModule } from './home/home.module';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
-import {QuestionService} from './home/home.service';
-import {MomentModule} from 'ngx-moment';
-import {TopicComponent} from './home/topic.component';
-import {HomeModule} from './home/home.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    TopicComponent
+    //HomeComponent
   ],
   imports: [
     BrowserModule,
-    HomeModule,
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
     SharedModule,
     AuthModule,
     AdminModule,
-    MomentModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HomeModule
   ],
-  providers: [QuestionService,{
+  providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthHeaderInterceptor,
     multi: true,

@@ -11,8 +11,7 @@ import { useAnimation } from '@angular/animations';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() user: any;
-  public src: string;
+  @Input() user: any = {};
 
   constructor(
     private authService: AuthService,
@@ -20,9 +19,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Dummy login
-    this.src = this.user.picture;
-
+    console.log(this.user);
   }
 
   logout(): void {

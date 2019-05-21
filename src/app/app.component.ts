@@ -26,17 +26,9 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private domSanitizer: DomSanitizer,
-    private matIconRegistry: MatIconRegistry,
-    private service: SetUserService,
-    private requests: MakeRequestService
+    private matIconRegistry: MatIconRegistry
   ) {
     this.registerSvgIcons();
-
-    // Verify at login -> Dummy data
-    this.userSubscription = this.requests.getDataLocal()
-                            .subscribe(data => {
-                              localStorage.setItem('user', JSON.stringify(data));
-                            });
 
   }
 
@@ -51,9 +43,6 @@ export class AppComponent implements OnInit {
     this.userSubscription = this.authService.$userSource.subscribe((user) => {
       this.user = user;
     });
-
-    // Dummy data to login
-    this.user = this.service.getCachedData('user');
     
   }
 
