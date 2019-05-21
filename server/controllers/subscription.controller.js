@@ -28,6 +28,6 @@ async function remove(token) {
   const tokenDel = await Subscription.findOne({token: token});
   return await tokenDel.remove();
 }
-async function findAll(user) {
-  return await Subscription.find({email: user.email});
+async function findAll(email) {
+  return await Subscription.find({email: email});
 }

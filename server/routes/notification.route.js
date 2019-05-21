@@ -13,7 +13,7 @@ router.route('/')
     .get(asyncHandler(getLastNotices));
 
 async function push(req, res) {
-  let notice = await noticeCtrl.push(req.body,req.user);
+  let notice = await noticeCtrl.push(req.body,req.body.email);
   res.json(notice);
 }
 async function getLastNotices(req, res) {

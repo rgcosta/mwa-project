@@ -44,10 +44,10 @@ async function insert(notice, user) {
 async function getLastNotices(user) {
   return await Notification.find({email: user.email});
 }
-async function push(notice,user) {
-  let subs = await subCtrl.findAll(user);
-
+async function push(notice,email) {
+  let subs = await subCtrl.findAll(email);
   console.log(subs);
+  console.log(email);
   let body;
 
   for(let sub of subs){

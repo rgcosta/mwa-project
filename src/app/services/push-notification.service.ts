@@ -4,7 +4,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {mergeMap} from 'rxjs/operators';
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PushNotificationService {
   currentNotice = new BehaviorSubject(null);
   subscribeCreateUrl = '/api/subscriptions';
@@ -62,6 +62,8 @@ export class PushNotificationService {
 
   listen() {
     this.afMessaging.messages
-        .subscribe((message) => {console.log(message); });
+        .subscribe((message) => {console.log(message);
+          this.currentNotice.next(message);
+        });
   }
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { useAnimation } from '@angular/animations';
 import {PushNotificationService} from '../services/push-notification.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ import {PushNotificationService} from '../services/push-notification.service';
 export class HeaderComponent implements OnInit {
 
   @Input() user: any = {};
-  message;
+  messages: any[] = [];
+  subscription: Subscription;
   constructor(
     private authService: AuthService,
     private router: Router ,
@@ -25,6 +27,16 @@ export class HeaderComponent implements OnInit {
     if ( this.user ) {
       this.pushNotificationService.requestPermission();
       this.pushNotificationService.listen();
+      this.subscription = this.pushNotificationService.currentNotice.subscribe(message => {
+        // const notifi = message.notification;
+        console.log(message);
+        if (message) {
+          this.messages.push(message);
+        } else {
+          // clear messages when empty message received
+          this.messages = [];
+        }
+      });
     }
   }
 

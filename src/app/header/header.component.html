@@ -19,16 +19,17 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a [routerLink]="['/']" class="nav-link dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell"></i> Notifications <span class="badge">5</span>
+                            <i class="fas fa-bell"></i> Notifications <span class="badge">{{messages.length || 0}}</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="nav-link" [routerLink]="['/']">Action</a></li>
-                            <li><a class="nav-link" [routerLink]="['/']">Another action</a></li>
-                            <li><a class="nav-link" >test t</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a class="nav-link" (click)="pushNotificationService.requestPermission()"> let us send you notifications</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a class="nav-link" (click)="pushNotificationService.unsubscribe()">Delete my token</a></li>
+
+                            <li *ngFor="let message of messages"><a class="nav-link"  [routerLink]="['/']">{{message.notification.body}}</a></li>
+                            <!--<li><a class="nav-link" [routerLink]="['/']">Another action</a></li>-->
+                            <!--<li><a class="nav-link" >test t</a></li>-->
+                            <!--<li role="separator" class="divider"></li>-->
+                            <!--<li><a class="nav-link" (click)="pushNotificationService.requestPermission()"> let us send you notifications</a></li>-->
+                            <!--<li role="separator" class="divider"></li>-->
+                            <!--<li><a class="nav-link" (click)="pushNotificationService.unsubscribe()">Delete my token</a></li>-->
                         </ul>
                     </li>
                 </ul>
