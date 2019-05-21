@@ -22,8 +22,8 @@ const options = {
     "notification": {
       "title": "Title",
       "body": "body",
-      "click_action" : "http://localhost:3000/",
-      "icon": "http://localhost:3000/icon.png"
+      "click_action" : "http://localhost:4040/",
+      "icon": "http://localhost:4040/logo.png"
     },
     "to" : "receiverToken"
   }
@@ -44,10 +44,10 @@ async function insert(notice, user) {
 async function getLastNotices(user) {
   return await Notification.find({email: user.email});
 }
-async function push(notice,user) {
-  let subs = await subCtrl.findAll(user);
-
+async function push(notice,email) {
+  let subs = await subCtrl.findAll(email);
   console.log(subs);
+  console.log(email);
   let body;
 
   for(let sub of subs){
