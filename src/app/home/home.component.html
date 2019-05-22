@@ -19,7 +19,7 @@
               <div *ngIf="question.answers.length != 0; else noAnswer">
                   <div class="media mt-3">
                     <span *ngIf="question.answers[0].picture; else noPicture">
-                      <img [src]="src" height="48px" width="48px" class="mr-3" alt="author">
+                      <img [src]="question.answers[0].picture" height="48px" width="48px" class="mr-3" alt="author">
                     </span>
                     <div class="media-body">
                       <span class="mt-0 username">{{ question.answers[0].username }} </span>

@@ -14,7 +14,9 @@ export class HeaderComponent implements OnInit {
 
   @Input() user: any = {};
   messages: any[] = [];
+  private src: string = '../../assets/profile.png';
   subscription: Subscription;
+  
   constructor(
     private authService: AuthService,
     private router: Router ,
