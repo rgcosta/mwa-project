@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { SetUserService } from './services/set-user.service';
 import { MakeRequestService } from './services/make-request.service'
+import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
 
 
 import { AuthService } from './auth/auth.service';
@@ -18,18 +19,31 @@ import * as schema from './schema/equipment.json';
 })
 export class AppComponent implements OnInit {
 
-  // Dummy Test
   private userSubscription: Subscription;
+  private subscription: Subscription;
+  private reqSubscription: Subscription;
+
   public user: any;
+  private fullname: string;
+  private email: string;
+
+  private requrl: string = 'api/topics';
+  private topics: any;
+
+  questionForm = new FormGroup({
+    newQuestion: new FormControl('', [Validators.required]),
+    topic: new FormControl('', [Validators.required])
+  });
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private domSanitizer: DomSanitizer,
-    private matIconRegistry: MatIconRegistry
+    private matIconRegistry: MatIconRegistry,
+    private service: MakeRequestService,
+    private userService: SetUserService
   ) {
     this.registerSvgIcons();
-
   }
 
   public ngOnInit() {
@@ -42,10 +56,44 @@ export class AppComponent implements OnInit {
     // update this.user after login/register/logout
     this.userSubscription = this.authService.$userSource.subscribe((user) => {
       this.user = user;
+      if(this.user){
+        this.fullname = this.user.fullname;
+        this.email = this.user.email;
+      }
     });
     
   }
 
+  getTopics(){
+    this.subscription = this.service.getData(this.requrl).subscribe(data =>{
+      this.topics = data;
+    });
+  }
+
+  addQuestion() {
+    console.log(this.questionForm.valid);
+    if(!this.questionForm.valid) return;
+    let url = 'api/questions'
+    let created: any;
+    let {
+      newQuestion,
+      topic,
+    } = this.questionForm.getRawValue();
+    let content = {
+      title: newQuestion,
+      author: this.email,
+      status: "open",
+      isPublic: true,
+      topic: topic
+    }
+    this.reqSubscription = this.service.postData(url, content)
+                              .subscribe(data => {
+                                console.log(data);
+                                created = data;
+                                this.router.navigate(['/', 'question', created._id]);
+                              });
+  }
+  
   logout(): void {
     this.authService.signOut();
     this.navigate('');
@@ -58,6 +106,12 @@ export class AppComponent implements OnInit {
   ngOnDestroy() { 
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
+    }
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
+    if(this.reqSubscription){
+      this.reqSubscription.unsubscribe();
     }
   }
 

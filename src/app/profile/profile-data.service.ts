@@ -9,9 +9,7 @@ export class ProfileDataService {
   constructor(public http: HttpClient) { }
 
   getMyQuestions(userId) {
-    let path = `/api/profiles/${userId}/questions`;
-    console.log(path);
-    return this.http.get(path);
+    return this.http.get(`/api/profiles/${userId}/questions`);
   }
 
   getMyAnswers() {

@@ -3,7 +3,7 @@
     <div class="card" >
       <div class="card-body">
         <h5 class="card-title">{{question.title}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Asked at {{question.createdAt | date:'short'}} about {{question.topic}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Created at {{question.createdAt | date:'short'}} about {{question.topic}}</h6>
         <a [routerLink]="['/question',question._id]" class="card-link">{{question.answers.length}} Answers</a>
       </div>
     </div>

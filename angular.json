@@ -18,6 +18,8 @@
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
+              "src/firebase-messaging-sw.js",
+              "src/manifest.json",
               "src/favicon.ico"
             ],
             "styles": [

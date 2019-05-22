@@ -1,51 +1,50 @@
 <br>
 
 <div class='row'>
-  <div class='col-md-3'>
-      <app-topic></app-topic>
+  <div class='col-sm-12 col-md-2'>
+      <app-topic [topics]="topics" [subject]="subject"></app-topic>
   </div>
-  <div class='col-md-6'>
+  <div class='col-md-7'>
+      <div *ngFor= "let question of items" class="card multi-cards">
 
-
-    <div id="qnlink" class="m-link">
-      <h5> <a href="#" id="add-question"   target="">What is your question?
-      </a></h5>
-    </div>
-    <div *ngFor= "let question of Question" class="ui-block">
-      <article class="hentry post">
-        <a  [routerLink]="['/question',question._id]" style="font-weight: bold; font:18px 'q_serif',Georgia,Times,'Times New Roman','Hiragino Kaku Gothic Pro','Meiryo',serif;" >{{question.title}}</a>
-        <div *ngIf="question.answers.length != 0; else noAnswer">
-          <div class="post__author author vcard inline-items">
-            <img [src]="question.answers[0].picture"  height="48px" width="48px" class="img-responsive" alt="author">
-            <div>
-              <p class="user">{{question.answers[0].username}}</p>
-
-              <span class="answer">Answered {{question.createdAt |amTimeAgo}}</span>
+        <div class="media">
+          <div class="media-body">
+            <a [routerLink]="['/', 'question', question._id]" >
+                <h4 class="mt-0"><b>{{question.title}}</b></h4>
+            </a>
+            <div align="right">
+                <span class="answer-topic text-muted"><b>{{question.topic}}</b></span>
             </div>
+            <article class="entry post">
+              <div *ngIf="question.answers.length != 0; else noAnswer">
+                  <div class="media mt-3">
+                    <span *ngIf="false; else noPicture">
+                      <img [src]="question.answers[0].picture" height="48px" width="48px" class="mr-3" alt="author">
+                    </span>
+                    <div class="media-body">
+                      <span class="mt-0 username">{{ question.answers[0].username }} </span>
+                      <span class="updated text-muted"><i> {{question.createdAt | date}}</i></span>
+                      <div class="answer-body">
+                        {{question.answers[0].body}}
+                      </div>
+                    </div>
+                  </div>
+                  <ng-template #noPicture>
+                    <i align="center" class="fas fa-user-circle fa-3x"></i>
+                  </ng-template>                
+              </div>
+              <ng-template #noAnswer>
+                <p class="no-answer-body text-muted">No answer yet!</p>
+              </ng-template>
+
+            </article>
           </div>
-
-
-
-
-
-
-
-          {{question.answers[0].body}}
-
-        </div>
-            <ng-template #noAnswer>
-                <p>No Answer</p>
-            </ng-template>
-
-          </article>
         </div>
 
-
-
-
+      </div>
   </div>
   <div class='col-md-3'>
-    <app-top5></app-top5>
+    <app-top5 [bytopics]="bytopics" [subject]="subject"></app-top5>
   </div>
 </div>
 

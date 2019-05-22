@@ -1,21 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.service';
-import { HomeComponent } from '../home/home.component';
-import {QuestionComponent} from '../home/question.component';
 
-const routes: Routes = [ {
-  path: 'question/:id',
-  component: QuestionComponent
-},{
+const routes: Routes = [{
   path: 'home',
-  component: HomeComponent
+  loadChildren: 'app/home/home.module#HomeModule'
 }, {
-  path: 'home/:topic',
-  component: HomeComponent
-}, {
-  path: 'home/:topic/:new',
-  redirectTo: 'home/:new'
+  path: 'question',
+  loadChildren: 'app/questions/questions.module#QuestionsModule'
 }, {
   path: 'auth',
   loadChildren: 'app/auth/auth.module#AuthModule'

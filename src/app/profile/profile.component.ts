@@ -20,16 +20,23 @@ export class ProfileComponent implements OnInit {
   }
 
   myQuestions() {
+    // this.quesOrAns.length = 0;
     this.profileData.getMyQuestions(this.user.id).subscribe( question => {
       this.quesOrAns.push(question);
     });
+    console.log(this.quesOrAns);
     this.menuItem = 2;
   }
 
   questionsFollowed() {
-    this.profileData.getQuestionsFollowed(this.user.id).subscribe( question => {
-      this.quesOrAns.push(question);
-    });
-    this.menuItem = 2;
+    // this.quesOrAns.length = 0;
+    // this.profileData.getQuestionsFollowed(this.user.id).subscribe( question => {
+    //   this.quesOrAns.push(question);
+    // });
+    // this.menuItem = 2;
+  }
+
+  myAnswers() {
+
   }
 }

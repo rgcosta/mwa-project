@@ -6,7 +6,8 @@ const subCtrl = require('./subscription.controller');
 const noticeSchema = Joi.object({
   title: Joi.string().required(),
   click_action: Joi.string().required(),
-  body: Joi.string().required()
+  body: Joi.string().required(),
+  questionId:Joi.string().optional()
 });
 
 const headers = {
@@ -22,8 +23,8 @@ const options = {
     "notification": {
       "title": "Title",
       "body": "body",
-      "click_action" : "http://localhost:3000/",
-      "icon": "http://localhost:3000/icon.png"
+      "click_action" : "http://localhost:4040/",
+      "icon": "http://localhost:4040/logo.png"
     },
     "to" : "receiverToken"
   }
@@ -44,20 +45,21 @@ async function insert(notice, user) {
 async function getLastNotices(user) {
   return await Notification.find({email: user.email});
 }
-async function push(notice,user) {
-  let subs = await subCtrl.findAll(user);
-
+async function push(notice,email) {
+  let subs = await subCtrl.findAll(email);
   console.log(subs);
+  console.log(email);
   let body;
 
   for(let sub of subs){
     options.json.notification.title = notice.title;
     options.json.notification.body = notice.body;
     options.json.notification.click_action = notice.click_action;
+    options.json.notification.questionId=notice.questionId;
     options.json.to= sub.token;
     body = await request(options);
   }
 
-  insert(notice,user).then((data)=>console.log(data));
+  // insert(notice,user).then((data)=>console.log(data)).catch(err=>console.error(err));
   return subs;
 }

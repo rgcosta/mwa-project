@@ -1,0 +1,108 @@
+<br>
+<div *ngIf="question; else noQestion">
+    <div class="row">
+        <div class="col-sm-12" align="right">
+            
+        </div>
+        <div class="col-md-8">
+          <h3>{{question.title}}</h3>
+          <span class="text-muted"><i><b>Answers {{question.answers.length}}</b></i></span>
+        </div>
+        <div class="col-md-4" align="right">
+          <span class="text-muted"><i>Asked: {{question.createdAt | date}}</i></span><br>
+          <span class="text-muted"><i>Topic: <b>{{question.topic}}</b></i></span><br>
+          <br>
+          <br>
+          <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#answerQuestion">Answer It!</a>
+        </div>
+        <div class="col-sm-12" align="center">
+            <hr>
+            <h5><i>Answers</i></h5>
+            <br>
+        </div>
+        
+        <div class="col" *ngIf="question.answers.length > 0; else noAnswer">
+            <div *ngFor="let answer of question.answers">
+              <div class="post__author author vcard inline-items">
+                  <div class="row">
+                      <!-- <img [src]="answer.picture"  height="48px" width="48px" class="img-responsive" alt="author"> &nbsp; -->
+                      <div class="col-sm-1" align="center">
+                          <i class="fas fa-user-circle fa-3x"></i>
+                      </div>
+                      <div class="col">
+                          <span class="user"><b>{{answer.username}}</b></span><br>
+                          <span class="answer text-muted"><i>Answered {{answer.createdAt | date}}</i></span>
+                      </div>
+                  </div>
+              </div>
+              <div class="row anAnswer">
+                <br>
+                {{answer.body}}
+                <br>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-2">
+                  <a href="#" class="text-info"><i class="fas fa-arrow-up"></i><span>Upvote</span></a>&nbsp;
+                  <span>{{answer.upvote}}</span>
+                </div>
+                <div class="col-md-2">
+                  <a href="#" class="text-info"><i class="fas fa-arrow-down"></i><span>Downvote</span></a>&nbsp;
+                  <span>{{answer.downvote}}</span>
+                </div>
+                <div class="col">
+
+                </div>
+              </div>
+              <hr>
+          </div>
+        </div>
+        <ng-template #noAnswer>
+            <div class="anAnswer">
+              <p class="text-muted">No answer...</p>
+            </div>
+        </ng-template>
+
+    </div>
+</div>
+<ng-template #noQestion>
+  <div align="center">
+    <h2 class="text-muted">Question not found</h2>
+  </div>
+</ng-template>
+
+
+<!-- <div class="modal fade" id="addQuestion" tabindex="-1" role="dialog" aria-labelledby="answerQuestion" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-plus"></i> New Question</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form [formGroup]="questionForm">
+          <div class="form-group">
+            <label for="newQuestion"><b>{{fullname}} Asked:</b></label>
+            <textarea class="form-control" name="newQuestion" formControlName="newQuestion" placeholder="Write your question here..." rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="topic">Select a topic</label>
+            <select class="form-control" formControlName="topic" name="topic" required>
+              <option selected></option>
+              <option *ngFor="let topic of topics">{{topic.title}}</option>
+            </select>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" (click)="addQuestion()">Add Question</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
