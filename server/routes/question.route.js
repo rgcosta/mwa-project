@@ -46,7 +46,7 @@ async function getById(req, res) {
   res.status(200).json(question);
 }
 async function addAnswer(req,res) {
-  const question = await questionCtrl.addAnswer(req.params.id,req.body);
+  const question = await questionCtrl.addAnswer(req.params.id,req.body, req.user);
   await getNotification('add',req,res);
   res.status(200).json(question);
 

@@ -1,0 +1,32 @@
+<div *ngIf="questionsOrAnswers[0]?.length > 0; else noQuestAnswer" >
+  <div *ngFor= "let question of questionsOrAnswers[0]" class="ui-block">
+    <div class="card" >
+      <div class="card-body">
+        <div *ngIf="menuItem == 2">
+          <h5 class="card-title">{{question.title}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Asked at {{question.createdAt | date:'short'}} about {{question.topic}}</h6>
+          <a [routerLink]="['/question',question._id]" class="card-link">{{question.answers.length}} Answers</a>
+          <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeQuestion(question._id)">Remove</button>
+        </div>
+        <div *ngIf="menuItem == 3">
+          <h5 class="card-title">{{question.title}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Created at {{question.createdAt | date:'short'}} about {{question.topic}}</h6>
+          <a class="card-link">{{question.answers.length}} Answers</a>
+        </div>
+        <div *ngIf="menuItem == 4">
+          <div *ngFor= "let answer of question.answers" class="ui-block">
+            <h5 class="card-title">{{answer.body}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              Answered at {{answer.createdAt | date:'short'}}
+              <span class="badge badge-secondary" >{{answer.upvote}}</span>
+              <span class="badge badge-pill badge-danger" >{{answer.downvote}}</span>
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noQuestAnswer>
+  <p>No Results</p>
+</ng-template>

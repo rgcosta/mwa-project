@@ -2,15 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile.component';
 import {RouterModule} from "@angular/router";
-import { ProfileInfoComponent } from './profile-info/profile-info.component';
+import { DisplayProfileComponent } from './display-profile/display-profile.component';
 
 @NgModule({
   imports: [
     CommonModule, RouterModule.forChild([
-      {path: '', component: ProfileComponent},
-      {path: ':myquestions', component: ProfileComponent}
+      {path: '', component: ProfileComponent}
     ])
   ],
-  declarations: [ProfileComponent, ProfileInfoComponent]
+  declarations: [ProfileComponent, DisplayProfileComponent]
 })
 export class ProfileModule { }
