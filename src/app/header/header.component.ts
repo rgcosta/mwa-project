@@ -33,7 +33,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     if ( this.user ) {
-      this.src = this.user.picture;
       this.pushNotificationService.requestPermission();
       this.pushNotificationService.listen();
       this.subscription = this.pushNotificationService.currentNotice.subscribe(message => {
