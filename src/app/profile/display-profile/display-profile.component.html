@@ -3,10 +3,16 @@
     <div class="card" >
       <div class="card-body">
         <div *ngIf="menuItem == 2">
-          <h5 class="card-title">{{question.title}}</h5>
+          <h5 class="card-title"><i class="far fa-question-circle fa-lg"></i> {{question.title}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">Asked at {{question.createdAt | date:'short'}} about {{question.topic}}</h6>
-          <a [routerLink]="['/question',question._id]" class="card-link">{{question.answers.length}} Answers</a>
-          <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeQuestion(question._id)">Remove</button>
+          <div class="row">
+            <div class="col">
+              <a [routerLink]="['/question',question._id]" class="card-link">{{question.answers.length}} Answers</a>
+            </div>
+            <div class="col" align="right">
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeQuestion(question._id)">Remove</button>
+            </div>
+          </div>
         </div>
         <div *ngIf="menuItem == 3">
           <h5 class="card-title">{{question.title}}</h5>
@@ -15,11 +21,11 @@
         </div>
         <div *ngIf="menuItem == 4">
           <div *ngFor= "let answer of question.answers" class="ui-block">
-            <h5 class="card-title">{{answer.body}}</h5>
+            <h5 class="card-title"><i class="far fa-edit"></i> {{answer.body}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">
               Answered at {{answer.createdAt | date:'short'}}
-              <span class="badge badge-secondary" >{{answer.upvote}}</span>
-              <span class="badge badge-pill badge-danger" >{{answer.downvote}}</span>
+              <span class="badge badge-success" >{{answer.upvote}} Upvote</span>&nbsp;
+              <span class="badge badge-danger" >{{answer.downvote}} Downvote</span>
             </h6>
           </div>
         </div>
@@ -28,5 +34,5 @@
   </div>
 </div>
 <ng-template #noQuestAnswer>
-  <p>No Results</p>
+  <span class="noResult">No Results</span>
 </ng-template>

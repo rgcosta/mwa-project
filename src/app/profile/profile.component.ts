@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ProfileDataService} from "./profile-data.service";
+import {ProfileDataService} from "../services/profile-data.service";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
 import {Router} from "@angular/router";
 
@@ -10,6 +10,8 @@ import {Router} from "@angular/router";
 })
 export class ProfileComponent implements OnInit {
 
+  private src: string;
+  private default: string = '../../assets/profile.png';
   menuItem: number;
   user : any;
   quesOrAns : any[]=[];
@@ -20,6 +22,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.menuItem = 1;
+    console.log(this.user);
   }
 
   myQuestions() {
@@ -53,5 +56,9 @@ export class ProfileComponent implements OnInit {
       this.profileData.removeQuestion(this.user.id, questionId).subscribe( data => {
         this.router.navigate(['']);
       })
+  }
+
+  pictureError(){
+    this.src = this.default;
   }
 }

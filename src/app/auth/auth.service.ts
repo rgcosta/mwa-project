@@ -48,7 +48,7 @@ export class AuthService {
     this.$userSource.next(user);
     (<any>window).user = user;
     if(user)
-      localStorage.setItem('user', JSON.stringify({id: user._id, fullname: user.fullname, email: user.email, isAdmin: user.isAdmin}));
+      localStorage.setItem('user', JSON.stringify({id: user._id, fullname: user.fullname, email: user.email, isAdmin: user.isAdmin, picture: user.picture}));
   }
 
   getUser(): Observable<any> {
