@@ -11,6 +11,9 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
 }
+a {
+  cursor: pointer;
+}
 .navbar-expand-lg{
   border-bottom: 1px solid #ccc;
   background:#fff !important;
@@ -30,6 +33,7 @@ body {
   border-radius: 5px;
   border: 1px solid #e6ecf5;
   margin-bottom: 15px;
+  padding:10px;
 }
 .post {
   position: relative;
@@ -129,7 +133,7 @@ ul {
 .social-icons{
   float:right;
 }
-h6.my-4 {
+h5.my-4 {
   margin: 13px;
 }
 div#v-pills-tab a {
@@ -288,8 +292,15 @@ details summary{
   font-size: 15px;
   font-weight: 600;
 }
+nav{
+  box-shadow: 0px 1px 0px 0 rgba(20, 20, 20, 0.1);
+  border: 1px solid rgba(20,20,20,0.1);
+}
 .profile-head .nav-tabs{
   margin-bottom:5%;
+}
+.nav-link{
+  border-radius: 5px;
 }
 .profile-head .nav-tabs .nav-link{
   font-weight:600;
@@ -365,8 +376,6 @@ details summary{
 }
 
 
-
-
 .dropdown-menu .divider {
   height: 1px;
   margin: 9px 0;
@@ -378,6 +387,9 @@ details summary{
   border: 1px solid red;
 }
 
+.noResult{
+  padding: 22px;
+}
 
 
 

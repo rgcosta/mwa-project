@@ -18,10 +18,11 @@ export class HeaderComponent implements OnInit {
   @Input() user: any = {};
   messages: any[] = [];
   searchResults: any[] = [];
-  private src: string = '../../assets/profile.png';
   subscription: Subscription;
   subscription2: Subscription;
   searchTextChanged = new Subject<string>();
+  private src: string;
+  private default: string = '../../assets/profile.png';
 
   constructor(
     private authService: AuthService,
@@ -55,6 +56,11 @@ export class HeaderComponent implements OnInit {
             this.searchResults.push(d); }});
     }
   }
+
+  pictureError(){
+    this.src = this.default;
+  }
+
   removeNotifi(i): void {
     console.log(i);
     this.messages.splice(i, 1);

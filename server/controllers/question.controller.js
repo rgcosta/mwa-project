@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const Question = require('../models/question.model');
 const Profile = require('../models/profile.model');
+const ObjectId = require('mongodb').ObjectId;
 
 const questionSchema = Joi.object({
   title: Joi.string().required(),
@@ -56,9 +57,18 @@ async function search(srch) {
 //--------------- query answers
 
 
-async function addAnswer(id,answer){
+async function addAnswer(id,answer, user){
   answer.downvote = 0;
   answer.upvote = 0;
+
+  //Also add question id in the profile collection
+  answer._id = new ObjectId();
+  let profile = await Profile.findOneAndUpdate({'user._id': user._id}, {$push: {answers: answer._id}});
+  if (!profile) {
+    profile = {user: user, answers: [answer._id]};
+    await new Profile(profile).save();
+  }
+
   return await Question.update({_id:id}, {$push:{ answers: answer }});
 }
 

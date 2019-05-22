@@ -39,15 +39,13 @@
                             </div>
                         </ul>
                     </div>
-
-
                 </form>
                 
                 <ul class="navbar-nav ml-auto">
                         <span class="nav-link">{{user.fullname}}</span>&nbsp;
                     <li class="avatar-profile d-none d-sm-block ">
                         <a class="dropdown-toggle"  data-toggle="dropdown" >
-                            <i class="fas fa-user-circle text-muted" style="font-size: 42px;"></i>
+                            <img [src]="user.picture" (error)="pictureError()" class="img-responsive userpic" alt="author"> &nbsp;
                         </a>
                         <div class="nav navbar-nav">
                             <div class="dropdown" >
@@ -61,8 +59,7 @@
                     </li>
                     <li>
                         &nbsp;
-                        &nbsp;
-                        
+                        &nbsp; 
                     </li>
                 </ul>
             </div>

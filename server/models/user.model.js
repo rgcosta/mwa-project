@@ -23,7 +23,11 @@ const UserSchema = new mongoose.Schema({
   roles: {
     type: String,
     default: 'user'
-  }
+  },
+  picture: {
+    type: String,
+    default: '../../assets/profile.png'
+ }
 }, {
   versionKey: false
 });

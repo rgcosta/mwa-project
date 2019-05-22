@@ -18,8 +18,8 @@
             <article class="entry post">
               <div *ngIf="question.answers.length != 0; else noAnswer">
                   <div class="media mt-3">
-                    <span *ngIf="question.answers[0].picture; else noPicture">
-                      <img [src]="question.answers[0].picture" height="48px" width="48px" class="mr-3" alt="author">
+                    <span>
+                      <img [src]="question.answers[0].picture" *ngIf="imageExists(question.answers[0].picture); else noPicture" class="mr-3 userpic" alt="author">
                     </span>
                     <div class="media-body">
                       <span class="mt-0 username">{{ question.answers[0].username }} </span>
@@ -30,7 +30,7 @@
                     </div>
                   </div>
                   <ng-template #noPicture>
-                    <i align="center" class="fas fa-user-circle fa-3x"></i>
+                      <img [src]="default"  class="mr-3 userpic" alt="author">
                   </ng-template>                
               </div>
               <ng-template #noAnswer>
