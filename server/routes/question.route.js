@@ -36,6 +36,11 @@ async function getAll(req, res) {
   res.status(200).json(questions);
 }
 
+async function search(req, res) {
+  const questions = await questionCtrl.search(req.params.q);
+  res.status(200).json(questions);
+}
+
 async function getById(req, res) {
   const question = await questionCtrl.getById(req.params.id);
   res.status(200).json(question);

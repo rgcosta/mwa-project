@@ -22,6 +22,7 @@ import {PushNotificationService} from './services/push-notification.service';
 import {MatButtonModule, MatIconModule} from '@angular/material';
 import {QuestionService} from './services/home.service';
 import {MomentModule} from 'ngx-moment';
+import {SearchService} from './services/search.service';
 
 
 
@@ -53,7 +54,7 @@ import {MomentModule} from 'ngx-moment';
     provide: HTTP_INTERCEPTORS,
     useClass: CatchErrorInterceptor,
     multi: true,
-  }, PushNotificationService, QuestionService],
+  }, PushNotificationService, QuestionService ,SearchService],
   entryComponents: [],
   bootstrap: [AppComponent]
 })

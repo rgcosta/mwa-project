@@ -19,7 +19,8 @@ module.exports = {
   addAnswer,
   upvoteAnswer,
   downvoteAnswer,
-  getAnswer
+  getAnswer,
+  search
 };
 
 async function insert(question, user) {
@@ -43,6 +44,12 @@ async function getAll() {
 
 async function getById(id) {
   return await Question.findById(id);
+}
+
+async function search(srch) {
+  const pattern = `${srch}`;
+  console.log(pattern);
+  return await Question.find({ title: { $regex: pattern ,$options:'$i'} }).sort({createdAt:-1}).select('title').lean();
 }
 
 //--------------- query answers
