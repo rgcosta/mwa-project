@@ -2,10 +2,23 @@
 <app-header *ngIf="user" [user]="user"></app-header>
 
 <a href="#" *ngIf="user" (click)="getTopics()" class="btn btn-sm btn-outline-success addQuestion" data-toggle="modal" data-target="#addQuestion">Add Question</a>
+<div class="row alert-data">
+  <div class="col-sm-12 col-md-6 col-lg-4 offset-md-6 offset-lg-8 msg-error">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="far fa-times-circle fa-lg"></i> <strong> Error:</strong> Operation Fail!
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-4 offset-md-6 offset-lg-8 msg-success">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="far fa-check-circle fa-lg"></i> <strong> Success:</strong> Operation Completed!
+    </div>
+  </div>
+</div>
   
 <div class="wrapper-app container">
   <router-outlet></router-outlet>
 </div>
+
 
 <div class="modal fade" id="addQuestion" tabindex="-1" role="dialog" aria-labelledby="AddQuestion" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
