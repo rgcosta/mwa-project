@@ -80,7 +80,7 @@ async function getNotification(type,req,res){
   }
   switch (type) {
     case 'add':
-      reqBody.email = question.author;
+      reqBody.email = question.email ? question.email : question.author;
       reqBody.body = req.user.fullname + " is answered your question";
       break;
     case 'up':
