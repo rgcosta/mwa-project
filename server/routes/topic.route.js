@@ -26,7 +26,6 @@ async function getAll(req, res) {
     res.status(200).json(topics);
 }
 
-
 async function getAllQuestions(req, res) {
     const questions = await topicCtrl.getAllQuestions(req.params.name);
     res.status(200).json(questions);

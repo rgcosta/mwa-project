@@ -15,12 +15,7 @@
               <div class="post__author author vcard inline-items">
                 <img src="./assets/profile.png" style="height: 100px; width: 100px;" class="img-responsive" alt="author">
                 <div class="author-date">
-                  <a class="h6 post__author-name fn" href="#" >Author name</a>
-                  <div class="post__date">
-                    <time class="published" datetime="2004-07-24T18:18">
-
-                    </time>
-                  </div>
+                  {{user.fullname}}
                 </div>
 
               </div>
@@ -44,9 +39,10 @@
             <div class="ui-block" style="border-style: none;">
               <hr>
               <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link " data-toggle="pill" [routerLink]="['']" (click)="isInfo = !isInfo">Information 2</a>
-                <a class="nav-link " data-toggle="pill" [routerLink]="['myquestions']" (click)="isInfo = !isInfo">AAa</a>
-                <a class="nav-link" data-toggle="pill" href="#">BB</a>
+                <a class="nav-link" data-toggle="pill" (click)="menuItem = 1">Information 2</a>
+                <a class="nav-link " data-toggle="pill" (click)="myQuestions()">Questions Asked</a>
+                <a class="nav-link" data-toggle="pill" (click)="myAnswers()">BB</a>
+                <a class="nav-link" data-toggle="pill" (click)="questionsFollowed()">Questions Followed</a>
               </div>
             </div>
           </div>
@@ -55,13 +51,34 @@
         <div class="col-lg-8">
           <div class=" aff-right">
             <div class="ui-block" style="border-style: none;">
-              <div *ngIf="isInfo; else otherItems">
-                Info is True
+              <div *ngIf="menuItem===1; else otherItems">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h6 class="my-4">Profile Information</h6>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Name</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{user.fullname}}</p>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Email:</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{user.email}}</p>
+                  </div>
+                </div>
               </div>
               <ng-template #otherItems>
-                false condition
+                <app-display-profile [questionsOrAnswers]="quesOrAns"></app-display-profile>
               </ng-template>
-              <router-outlet></router-outlet>
 
             </div>
 

@@ -14,7 +14,7 @@ async function getAllQuestions(userId) {
     let questionIds = await Profile.findOne({'user._id': new ObjectId(userId)}, {questions:1});
 
     if (!questionIds) {
-        return JSON.parse('{"code": 404, "message": "No questions found for this user."}');
+        return JSON.parse('[]');
     }
 
     let questions = [];
@@ -26,5 +26,6 @@ async function getAllQuestions(userId) {
         questions.push(question);
     }
 
+    console.log(question);
     return questions;
 }

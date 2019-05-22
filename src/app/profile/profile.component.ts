@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ProfileDataService} from "./profile-data.service";
 
 @Component({
   selector: 'app-profile',
@@ -7,11 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  isInfo: boolean = true;
+  menuItem: number;
+  user : any;
+  quesOrAns : any[]=[];
 
-  constructor() { }
+  constructor(public profileData: ProfileDataService) { }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.menuItem = 1;
   }
 
+  myQuestions() {
+    this.profileData.getMyQuestions(this.user.id).subscribe( question => {
+      this.quesOrAns.push(question);
+    });
+    this.menuItem = 2;
+  }
+
+  questionsFollowed() {
+    this.profileData.getQuestionsFollowed(this.user.id).subscribe( question => {
+      this.quesOrAns.push(question);
+    });
+    this.menuItem = 2;
+  }
 }
