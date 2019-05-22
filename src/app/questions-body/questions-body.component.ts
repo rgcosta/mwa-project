@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {QuestionService} from '../services/home.service';
+import { QuestionService } from '../services/home.service';
 
 @Component({
   selector: 'app-questions-body',
@@ -20,8 +20,6 @@ export class QuestionsBodyComponent implements OnInit {
     this.questions.upVote( questionId  , answerId).subscribe(data => {
       this.question =  data;
     });
-
-
   }
   down(questionId , answerId) {
     this.questions.downVote(questionId , answerId).subscribe(data => {
