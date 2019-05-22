@@ -13,7 +13,7 @@ export class QuestionsBodyComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.user.email);
+    console.log("-->", this.question);
   }
 
 }

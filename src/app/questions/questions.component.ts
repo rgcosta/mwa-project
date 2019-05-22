@@ -39,7 +39,6 @@ export class QuestionsComponent implements OnInit {
     private authService: AuthService) {
 
     this.user = this.userService.getCachedData('user');
-
     this.subscription = this.routerActive.params.subscribe(param => {
       this.questions = param.target; 
     });
@@ -64,7 +63,6 @@ export class QuestionsComponent implements OnInit {
       username: this.user.fullname,
       isPublic: true,
     };
-    console.log(url);
     this.reqSubscription = this.service.postData(url, content)
                               .subscribe(data => {
                                 console.log(data);

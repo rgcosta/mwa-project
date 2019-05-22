@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
       data => {
         localStorage.setItem(this.label, JSON.stringify(data));
         this.Question = data;
+        console.log(data);
         this.items = this.subject ?
                           this.Question.filter(data => data.topic == this.subject)
                               .sort((a, b) => a.createdAt > b.createdAt ? -1 : 1)
