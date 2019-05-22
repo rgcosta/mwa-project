@@ -6,6 +6,7 @@ const questionSchema = Joi.object({
   title: Joi.string().required(),
   topic: Joi.string().required(),
   author:Joi.string().required(),
+    email:Joi.string().email(),
   isPublic:Joi.boolean().required(),
   status: Joi.string(),
   answers: Joi.array()
