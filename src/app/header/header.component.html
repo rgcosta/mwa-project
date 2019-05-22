@@ -4,7 +4,6 @@
         <div class="container">
 
             <a class="navbar-brand" [routerLink]="['/']" >
-                <!-- <h1 class="card-title title"><b> Quora</b></h1> -->
                 <img src='../../assets/logo.png' alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,29 +14,33 @@
                     <li class="nav-item active">
                         <a class="nav-link" [routerLink]="['/']"><i class="fa fa-home"></i> Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/']"><i class="fas fa-user-friends"></i> OurTeam</a>
-                    </li>
                     <li class="nav-item dropdown">
-                        <a [routerLink]="['/']" class="nav-link dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell"></i> Notifications <span class="badge">{{messages.length || ''}}</span>
+                        <a [routerLink]="['/']" class="nav-link dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+                            <i class="fas fa-bell"></i> Notifications <span class="badge badge-danger">{{messages.length || ''}}</span>
                         </a>
                         <ul class="dropdown-menu" >
-                            <div *ngIf="messages.length>0; else noNotification">
+                            <div *ngIf="messages.length>0; else noNotification" style="overflow:scroll; max-height:400px;">
                                 <li *ngFor="let message of messages; let i = index"><a class="nav-link" (click)="removeNotifi(i)"  routerLink="question/{{message.data['gcm.notification.questionId']}}">{{message.notification.body}}</a></li>
                             </div>
-                                <!--<li><a class="nav-link" [routerLink]="['/']">Another action</a></li>-->
-                            <!--<li><a class="nav-link" >test t</a></li>-->
-                            <!--<li role="separator" class="divider"></li>-->
-                            <!--<li><a class="nav-link" (click)="pushNotificationService.requestPermission()"> let us send you notifications</a></li>-->
-                            <!--<li role="separator" class="divider"></li>-->
-                            <!--<li><a class="nav-link" (click)="pushNotificationService.unsubscribe()">Delete my token</a></li>-->
                         </ul>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search Question" aria-label="Search">
-                    <button class="btn btn-light"><i class="fa fa-search"></i></button>
+                    <div class="dropdown">
+                        <div class="input-group" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                            </div>
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search Question" aria-label="Search" (keypress)='onkeypress($event.target.value)'>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <div *ngIf="searchResults.length>0; else noSearch" style="overflow:scroll; max-height:400px;">
+                                <li *ngFor="let results of searchResults; let i = index"><a class="nav-link" (click)="removeNotifi(i)"  routerLink="question/{{results._id}}">{{  (results.title.length>50)? (results.title | slice:0:50)+'...':(results.title) }}</a></li>
+                            </div>
+                        </ul>
+                    </div>
+
+
                 </form>
                 
                 <ul class="navbar-nav ml-auto">
@@ -47,7 +50,7 @@
                             <i class="fas fa-user-circle text-muted" style="font-size: 42px;"></i>
                         </a>
                         <div class="nav navbar-nav">
-                            <div class="dropdown">
+                            <div class="dropdown" >
                                 <div class="dropdown-menu">
                                     <a [routerLink]="['/profile']" class="dropdown-item"><i class="far fa-user-circle"></i> Profile</a>
                                     <div class="dropdown-divider"></div>
@@ -71,5 +74,9 @@
         <li>
             <a class="nav-link">No nofitication</a>
         </li>
+    </div>
+</ng-template>
+<ng-template #noSearch>
+    <div>
     </div>
 </ng-template>

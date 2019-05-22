@@ -20,6 +20,9 @@ import { HeaderComponent } from './header/header.component';
 
 import {PushNotificationService} from './services/push-notification.service';
 import {MatButtonModule, MatIconModule} from '@angular/material';
+import {QuestionService} from './services/home.service';
+import {MomentModule} from 'ngx-moment';
+import {SearchService} from './services/search.service';
 
 
 
@@ -41,6 +44,7 @@ import {MatButtonModule, MatIconModule} from '@angular/material';
     AuthModule,
     AdminModule,
     AppRoutingModule,
+      MomentModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -50,7 +54,7 @@ import {MatButtonModule, MatIconModule} from '@angular/material';
     provide: HTTP_INTERCEPTORS,
     useClass: CatchErrorInterceptor,
     multi: true,
-  }, PushNotificationService],
+  }, PushNotificationService, QuestionService ,SearchService],
   entryComponents: [],
   bootstrap: [AppComponent]
 })

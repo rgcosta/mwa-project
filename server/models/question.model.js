@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const QuestionSchema = new mongoose.Schema({
     title: String,
     author: String,
+    email:String,
     answers: [{
+        email:String,
         username: String,
         picture: String,
         body: String,

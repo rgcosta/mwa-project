@@ -6,6 +6,7 @@ const questionSchema = Joi.object({
   title: Joi.string().required(),
   topic: Joi.string().required(),
   author:Joi.string().required(),
+    email:Joi.string().email(),
   isPublic:Joi.boolean().required(),
   status: Joi.string(),
   answers: Joi.array()
@@ -18,7 +19,9 @@ module.exports = {
   getById,
   addAnswer,
   upvoteAnswer,
-  downvoteAnswer
+  downvoteAnswer,
+  getAnswer,
+  search
 };
 
 async function insert(question, user) {
@@ -44,6 +47,12 @@ async function getById(id) {
   return await Question.findById(id);
 }
 
+async function search(srch) {
+  const pattern = `${srch}`;
+  console.log(pattern);
+  return await Question.find({ title: { $regex: pattern ,$options:'$i'} }).sort({createdAt:-1}).select('title').lean();
+}
+
 //--------------- query answers
 
 
@@ -65,4 +74,7 @@ async function upvoteAnswer(id,answerId){
 async function downvoteAnswer(id,answerId){
   await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.downvote": 1 }});
   return await Question.findOne({_id:id,'answers._id':answerId});
+}
+async function getAnswer(id,answerId){
+  return await Question.findOne({_id:id,'answers._id':answerId}).select('answers.$').lean();
 }

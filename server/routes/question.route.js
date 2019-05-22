@@ -19,9 +19,9 @@ router.route('/:id')
 router.route('/:id/answers')
     .post(asyncHandler(addAnswer));
 router.route('/:id/answers/:answerId/upvote')
-    .post(asyncHandler(upvoteAnswer));
+    .put(asyncHandler(upvoteAnswer));
 router.route('/:id/answers/:answerId/downvote')
-    .post(asyncHandler(downvoteAnswer));
+    .put(asyncHandler(downvoteAnswer));
 router.route('/:id/answers/:answerId')
     .get(asyncHandler(getAnswer));
 async function insert(req, res) {
@@ -33,6 +33,11 @@ async function insert(req, res) {
 
 async function getAll(req, res) {
   const questions = await questionCtrl.getAll();
+  res.status(200).json(questions);
+}
+
+async function search(req, res) {
+  const questions = await questionCtrl.search(req.params.q);
   res.status(200).json(questions);
 }
 
@@ -75,15 +80,15 @@ async function getNotification(type,req,res){
   }
   switch (type) {
     case 'add':
-      reqBody.email = question.author;
+      reqBody.email = question.email ? question.email : question.author;
       reqBody.body = req.user.fullname + " is answered your question";
       break;
     case 'up':
-      reqBody.email = answer.answers[0].username;
+      reqBody.email = answer.answers[0].email;
       reqBody.body = answer.answers[0].username + " is upvoted your answer";
       break;
     case 'down':
-      reqBody.email = answer.answers[0].username;
+      reqBody.email = answer.answers[0].email;
       reqBody.body = answer.answers[0].username + " is downvoted your answer";
       break;
   }
