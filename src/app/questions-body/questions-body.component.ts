@@ -10,6 +10,7 @@ export class QuestionsBodyComponent implements OnInit {
 
   @Input() question: any;
   @Input() user: any;
+  private src: string = '../../assets/profile.png';
 
   constructor(private questions: QuestionService) { }
 

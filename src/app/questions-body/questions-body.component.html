@@ -25,9 +25,9 @@
             <div *ngFor="let answer of question.answers">
               <div class="post__author author vcard inline-items">
                   <div class="row">
-                      <!-- <img [src]="answer.picture"  height="48px" width="48px" class="img-responsive" alt="author"> &nbsp; -->
+                      
                       <div class="col-sm-1" align="center">
-                          <i class="fas fa-user-circle fa-3x"></i>
+                          <img [src]="src"  height="48px" width="48px" class="img-responsive" alt="author"> &nbsp;
                       </div>
                       <div class="col">
                           <span class="user"><b>{{answer.username}}</b></span><br>
