@@ -15,8 +15,8 @@
                         <a class="nav-link" [routerLink]="['/']"><i class="fa fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell"></i> Notifications <span class="badge">{{messages.length || ''}}</span>
+                        <a [routerLink]="['/']" class="nav-link dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+                            <i class="fas fa-bell"></i> Notifications <span class="badge badge-danger">{{messages.length || ''}}</span>
                         </a>
                         <ul class="dropdown-menu" >
                             <div *ngIf="messages.length>0; else noNotification">
@@ -26,8 +26,13 @@
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search Question" aria-label="Search">
-                    <button class="btn btn-light"><i class="fa fa-search"></i></button>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                        </div>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search Question" aria-label="Search" (keyup)="search($event)">
+                    </div>
+                    <!--<button (click)="search($event)" class="btn btn-light"><i class="fa fa-search"></i></button>-->
                 </form>
                 
                 <ul class="navbar-nav ml-auto">
