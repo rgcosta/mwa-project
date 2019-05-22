@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const Question = require('../models/question.model');
+
 const Profile = require('../models/profile.model');
 const ObjectId = require('mongodb').ObjectId;
 
@@ -62,7 +63,7 @@ async function deleteAnswer(userId,answerId) {
     let answersIds = await  Profile.findOne({'user._id':new ObjectId(userId)});
     for(let i=0 ; i<answersIds.answers.length;i++){
         if(answerId == answersIds.answers[i]){
-            await Answer.findOneAndRemove({_id:answerId});
+            await Question.answers.findOneAndRemove({_id:answerId});
         }
         answersIds.answers = answersIds.answers.pull(answerId);
         await Profile(answersIds).save();
