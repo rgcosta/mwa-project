@@ -84,11 +84,11 @@ async function getNotification(type,req,res){
       reqBody.body = req.user.fullname + " is answered your question";
       break;
     case 'up':
-      reqBody.email = answer.answers[0].username;
+      reqBody.email = answer.answers[0].email;
       reqBody.body = answer.answers[0].username + " is upvoted your answer";
       break;
     case 'down':
-      reqBody.email = answer.answers[0].username;
+      reqBody.email = answer.answers[0].email;
       reqBody.body = answer.answers[0].username + " is downvoted your answer";
       break;
   }
