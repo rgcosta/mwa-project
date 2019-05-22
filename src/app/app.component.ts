@@ -22,10 +22,12 @@ export class AppComponent implements OnInit {
   private userSubscription: Subscription;
   private subscription: Subscription;
   private reqSubscription: Subscription;
+  private fileSubscription: Subscription;
 
   public user: any;
   private fullname: string;
   private email: string;
+  private picture: string;
 
   private requrl: string = 'api/topics';
   private topics: any;
@@ -59,6 +61,7 @@ export class AppComponent implements OnInit {
       if(this.user){
         this.fullname = this.user.fullname;
         this.email = this.user.email;
+        this.picture = this.user.picture;
       }
     });
     
@@ -81,7 +84,8 @@ export class AppComponent implements OnInit {
     } = this.questionForm.getRawValue();
     let content = {
       title: newQuestion,
-      author: this.email,
+      author: this.fullname,
+      email: this.email,
       status: "open",
       isPublic: true,
       topic: topic

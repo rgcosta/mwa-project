@@ -27,7 +27,7 @@
                   <div class="row">
                       
                       <div class="col-sm-1" align="center">
-                          <img [src]="answer.picture"  height="48px" width="48px" class="img-responsive" alt="author"> &nbsp;
+                          <img [src]="answer.picture" *ngIf="imageExists(answer.picture); else noPicture" class="img-responsive userpic" alt="author"> &nbsp;
                       </div>
                       <div class="col">
                           <span class="user"><b>{{answer.username}}</b></span><br>
@@ -69,6 +69,9 @@
   <div align="center">
     <h2 class="text-muted">Question not found</h2>
   </div>
+</ng-template>
+<ng-template #noPicture>
+    <img [src]="default" class="img-responsive userpic" alt="author">
 </ng-template>
 
 

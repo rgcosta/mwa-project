@@ -62,6 +62,7 @@ export class QuestionsComponent implements OnInit {
     const content = {
       body: newAnswer,
       username: this.user.fullname,
+      email: this.user.email,
       isPublic: true,
     };
     console.log(url);
@@ -84,7 +85,7 @@ export class QuestionsComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
   private urlTopics: string = '/api/topics';
   private label: string = 'questions';
 
-  private src: string = "../../assets/profile.png";
+  private src: string;
+  private default: string = "../../assets/profile.png";
   private subject: string;
   private bytopics: any;
   private topics: any;
@@ -55,6 +56,13 @@ export class HomeComponent implements OnInit {
       }
     ); 
     
+  }
+
+  imageExists(url) {
+    var img = new Image();
+    if(img.onload) return true;
+    if(img.onerror) return false;
+    img.src = url;
   }
 
   ngOnInit() {   
