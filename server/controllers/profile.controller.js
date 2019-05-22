@@ -8,7 +8,8 @@ module.exports = {
     getAllQuestions,
     deleteQuestion,
     deleteAnswer,
-    getAllAnswers
+    getAllAnswers,
+    getQuestionsFollowed
 };
 
 async function getAllQuestions(userId) {
@@ -29,7 +30,6 @@ async function getAllQuestions(userId) {
         questions.push(question);
     }
 
-    console.log(question);
     return questions;
 }
 async function getAllAnswers(userId) {
@@ -46,7 +46,7 @@ async function getAllAnswers(userId) {
     let answer = null;
     for (let i= 0;i<answerIds.answers.length ;i++){
         id = answerIds.answers[i];
-        answer = await Answer.findById(id,project);
+        answer = await Question.findOne({'answers._id': new ObjectId(id)}, {'answers.$': 1});
         answers.push(answer);
     }
     return answers;
@@ -77,4 +77,26 @@ async function deleteAnswer(userId,answerId) {
         await Profile(answersIds).save();
     }
 
+}
+
+async function getQuestionsFollowed(userId) {
+    // const project = {_id: 1, title: 1, topic: 1, createdAt:1, answers:1, status:1};
+
+    let questionIds = await Profile.findOne({'user._id':new ObjectId(userId)}, {following:1});
+
+    console.log(questionIds);
+    if (!questionIds) {
+        return JSON.parse('[]');
+    }
+
+    let questions = [];
+    let id = '';
+    let question = null;
+    for (let i = 0; i < questionIds.following.length; i++) {
+        id = questionIds.following[i];
+        question = await Question.findById(id);
+        questions.push(question);
+    }
+
+    return questions;
 }

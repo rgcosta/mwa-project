@@ -12,6 +12,8 @@ router.route('/:userId/questions')
     .get(asyncHandler(getAllQuestions));
 router.route('/:userId/answers')
     .get(asyncHandler(getAllAnswers));
+router.route('/:userId/following')
+    .get(asyncHandler(getQuestionsFollowed));
 router.route('/:userId/questions/:questionId')
     .delete(asyncHandler(deleteQuestion));
 router.route('/:userId/answers/:answerId')
@@ -35,5 +37,10 @@ async function deleteAnswer(req,res) {
     await profileCtrl.deleteAnswer(req.params.answerId);
     res.status(200).json({success:1});
 
+}
+
+async function getQuestionsFollowed(req, res) {
+    const questions = await profileCtrl.getQuestionsFollowed(req.params.userId);
+    res.status(200).json(questions);
 }
 
