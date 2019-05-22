@@ -4,7 +4,7 @@ const Profile = require('../models/profile.model');
 const ObjectId = require('mongodb').ObjectId;
 
 
-odule.exports = {
+module.exports = {
     getAllQuestions,
     deleteQuestion,
     deleteAnswer,

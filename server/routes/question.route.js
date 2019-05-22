@@ -19,9 +19,9 @@ router.route('/:id')
 router.route('/:id/answers')
     .post(asyncHandler(addAnswer));
 router.route('/:id/answers/:answerId/upvote')
-    .post(asyncHandler(upvoteAnswer));
+    .put(asyncHandler(upvoteAnswer));
 router.route('/:id/answers/:answerId/downvote')
-    .post(asyncHandler(downvoteAnswer));
+    .put(asyncHandler(downvoteAnswer));
 router.route('/:id/answers/:answerId')
     .get(asyncHandler(getAnswer));
 async function insert(req, res) {
