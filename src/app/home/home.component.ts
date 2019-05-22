@@ -15,13 +15,14 @@ export class HomeComponent implements OnInit {
   private urlTopics: string = '/api/topics';
   private label: string = 'questions';
 
+  private src: string = "../../assets/profile.png";
   private subject: string;
   private bytopics: any;
   private topics: any;
-  
   private Question: any;
   private items: any;
   private subscription: Subscription;
+
   constructor(private service: MakeRequestService, private router: ActivatedRoute, private auth: AuthService) {
 
     this.subscription = this.router.params.subscribe(param => {

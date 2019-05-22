@@ -18,7 +18,7 @@
             <article class="entry post">
               <div *ngIf="question.answers.length != 0; else noAnswer">
                   <div class="media mt-3">
-                    <span *ngIf="false; else noPicture">
+                    <span *ngIf="question.answers[0].picture; else noPicture">
                       <img [src]="question.answers[0].picture" height="48px" width="48px" class="mr-3" alt="author">
                     </span>
                     <div class="media-body">

@@ -69,7 +69,6 @@ export class QuestionsComponent implements OnInit {
                               .subscribe(data => {
                                 console.log(data);
                                 this.reqSubscription = this.service.getDataById(this.url, this.questions).subscribe(
-                                    // tslint:disable-next-line:no-shadowed-variable
                                   data => {
                                             this.question = data;
                                             this.arrTemp = this.question.answers.sort((a, b) => a.createdAt > b.createdAt ? -1 : 1);
@@ -85,8 +84,7 @@ export class QuestionsComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  // tslint:disable-next-line:use-life-cycle-interface
+  
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
