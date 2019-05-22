@@ -18,8 +18,7 @@ module.exports = {
   getById,
   addAnswer,
   upvoteAnswer,
-  downvoteAnswer,
-  getAnswer
+  downvoteAnswer
 };
 
 async function insert(question, user) {
@@ -37,8 +36,8 @@ async function insert(question, user) {
 }
 
 async function getAll() {
-    const project = {_id: 1, title: 1, topic: 1, createdAt:1, answers:1};
-    return await Question.find({}, project);
+  const project = {_id: 1, title: 1, topic: 1, createdAt:1, answers:1};
+  return await Question.find({}, project);
 }
 
 async function getById(id) {
@@ -56,17 +55,14 @@ async function addAnswer(id,answer){
 
 
 async function upvoteAnswer(id,answerId){
-  return await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.upvote": 1 }});
+  await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.upvote": 1 }},{"answers.$.upvote":1});
+  return await Question.findOne({_id:id,'answers._id':answerId});
+  // ,{'answers.$.upvote':1}
 }
 
 
 
 async function downvoteAnswer(id,answerId){
-  return await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.downvote": 1 }});
+  await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.downvote": 1 }});
+  return await Question.findOne({_id:id,'answers._id':answerId});
 }
-
-
-async function getAnswer(id,answerId){
-  return await Question.findOne({_id:id,'answers._id':answerId}).select('answers.$').lean();
-}
-
