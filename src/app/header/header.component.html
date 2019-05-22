@@ -4,7 +4,6 @@
         <div class="container">
 
             <a class="navbar-brand" [routerLink]="['/']" >
-                <!-- <h1 class="card-title title"><b> Quora</b></h1> -->
                 <img src='../../assets/logo.png' alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,9 +14,6 @@
                     <li class="nav-item active">
                         <a class="nav-link" [routerLink]="['/']"><i class="fa fa-home"></i> Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/']"><i class="fas fa-user-friends"></i> OurTeam</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a [routerLink]="['/']" class="nav-link dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
                             <i class="fas fa-bell"></i> Notifications <span class="badge badge-danger">{{messages.length || ''}}</span>
@@ -26,12 +22,6 @@
                             <div *ngIf="messages.length>0; else noNotification">
                                 <li *ngFor="let message of messages; let i = index"><a class="nav-link" (click)="removeNotifi(i)"  routerLink="question/{{message.data['gcm.notification.questionId']}}">{{message.notification.body}}</a></li>
                             </div>
-                                <!--<li><a class="nav-link" [routerLink]="['/']">Another action</a></li>-->
-                            <!--<li><a class="nav-link" >test t</a></li>-->
-                            <!--<li role="separator" class="divider"></li>-->
-                            <!--<li><a class="nav-link" (click)="pushNotificationService.requestPermission()"> let us send you notifications</a></li>-->
-                            <!--<li role="separator" class="divider"></li>-->
-                            <!--<li><a class="nav-link" (click)="pushNotificationService.unsubscribe()">Delete my token</a></li>-->
                         </ul>
                     </li>
                 </ul>

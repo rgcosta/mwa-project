@@ -4,12 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { QuestionsComponent } from './questions.component';
 import { QuestionsRoutingModule } from './questions-routing.module'
 import { QuestionsBodyComponent } from '../questions-body/questions-body.component';
+import {MomentModule} from 'ngx-moment';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    QuestionsRoutingModule
+    QuestionsRoutingModule,
+    MomentModule
   ],
   declarations: [QuestionsComponent, QuestionsBodyComponent]
 })

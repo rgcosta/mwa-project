@@ -25,13 +25,13 @@
             <div *ngFor="let answer of question.answers">
               <div class="post__author author vcard inline-items">
                   <div class="row">
-                      <!-- <img [src]="answer.picture"  height="48px" width="48px" class="img-responsive" alt="author"> &nbsp; -->
+                      
                       <div class="col-sm-1" align="center">
-                          <i class="fas fa-user-circle fa-3x"></i>
+                          <img [src]="answer.picture"  height="48px" width="48px" class="img-responsive" alt="author"> &nbsp;
                       </div>
                       <div class="col">
                           <span class="user"><b>{{answer.username}}</b></span><br>
-                          <span class="answer text-muted"><i>Answered {{answer.createdAt | date}}</i></span>
+                          <span class="answer text-muted"><i>Answered {{answer.createdAt | amTimeAgo}}</i></span>
                       </div>
                   </div>
               </div>
@@ -43,11 +43,11 @@
               <br>
               <div class="row">
                 <div class="col-md-2">
-                  <a href="#" class="text-info"><i class="fas fa-arrow-up"></i><span>Upvote</span></a>&nbsp;
+                  <a class="text-info" (click)="up(question._id , answer._id)"><i class="fas fa-arrow-up"></i><span>Upvote</span></a>&nbsp;
                   <span>{{answer.upvote}}</span>
                 </div>
                 <div class="col-md-2">
-                  <a href="#" class="text-info"><i class="fas fa-arrow-down"></i><span>Downvote</span></a>&nbsp;
+                  <a  class="text-info" (click)="down(question._id ,answer._id)"><i class="fas fa-arrow-down"></i><span>Downvote</span></a>&nbsp;
                   <span>{{answer.downvote}}</span>
                 </div>
                 <div class="col">
