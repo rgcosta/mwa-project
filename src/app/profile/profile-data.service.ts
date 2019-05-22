@@ -12,11 +12,15 @@ export class ProfileDataService {
     return this.http.get(`/api/profiles/${userId}/questions`);
   }
 
-  getMyAnswers() {
-    return this.http.get('');
+  getMyAnswers(userId) {
+    return this.http.get(`/api/profiles/${userId}/answers`);
   }
 
   getQuestionsFollowed(userId) {
-    return this.http.get('');
+    return this.http.get(`/api/profiles/${userId}/following`);
+  }
+
+  removeQuestion(userId, questionId) {
+    return this.http.delete(`/api/profiles/${userId}/questions/${questionId}`);
   }
 }

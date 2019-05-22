@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-display-profile',
@@ -7,10 +7,16 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class DisplayProfileComponent implements OnInit {
   @Input() questionsOrAnswers: any;
+  @Input() menuItem:number;
+  @Output() onRemoveQuestion= new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  removeQuestion(questionId: any) {
+    this.onRemoveQuestion.emit(questionId);
   }
 
 }

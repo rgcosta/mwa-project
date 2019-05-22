@@ -17,7 +17,7 @@ router.route('/:userId/following')
 router.route('/:userId/questions/:questionId')
     .delete(asyncHandler(deleteQuestion));
 router.route('/:userId/answers/:answerId')
-    .delete(asyncHandler(deleteAnswer))
+    .delete(asyncHandler(deleteAnswer));
 async function getAllQuestions(req, res) {
 
     const questions = await profileCtrl.getAllQuestions(req.params.userId);

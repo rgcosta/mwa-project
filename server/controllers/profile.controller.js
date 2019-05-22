@@ -80,11 +80,10 @@ async function deleteAnswer(userId,answerId) {
 }
 
 async function getQuestionsFollowed(userId) {
-    // const project = {_id: 1, title: 1, topic: 1, createdAt:1, answers:1, status:1};
+    const project = {_id: 1, title: 1, topic: 1, createdAt:1, answers:1, status:1};
 
     let questionIds = await Profile.findOne({'user._id':new ObjectId(userId)}, {following:1});
 
-    console.log(questionIds);
     if (!questionIds) {
         return JSON.parse('[]');
     }
@@ -94,7 +93,7 @@ async function getQuestionsFollowed(userId) {
     let question = null;
     for (let i = 0; i < questionIds.following.length; i++) {
         id = questionIds.following[i];
-        question = await Question.findById(id);
+        question = await Question.findById(id, project);
         questions.push(question);
     }
 

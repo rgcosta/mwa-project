@@ -77,7 +77,7 @@
                 </div>
               </div>
               <ng-template #otherItems>
-                <app-display-profile [questionsOrAnswers]="quesOrAns"></app-display-profile>
+                <app-display-profile [questionsOrAnswers]="quesOrAns" [menuItem]="menuItem" (onRemoveQuestion)="removeQuestionById($event)"></app-display-profile>
               </ng-template>
 
             </div>
