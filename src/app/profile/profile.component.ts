@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(public profileData: ProfileDataService, private router: Router) { }
 
+
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.menuItem = 1;
@@ -34,6 +35,7 @@ export class ProfileComponent implements OnInit {
     this.quesOrAns.length = 0;
     this.profileData.getQuestionsFollowed(this.user.id).subscribe( following => {
       this.quesOrAns.push(following);
+      console.log(this.quesOrAns);
     });
     this.menuItem = 3;
   }
@@ -42,6 +44,7 @@ export class ProfileComponent implements OnInit {
     this.quesOrAns.length = 0;
     this.profileData.getMyAnswers(this.user.id).subscribe( answer => {
       this.quesOrAns.push(answer);
+      console.log(this.quesOrAns);
     });
     this.menuItem = 4;
   }

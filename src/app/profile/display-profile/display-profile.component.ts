@@ -8,7 +8,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class DisplayProfileComponent implements OnInit {
   @Input() questionsOrAnswers: any;
   @Input() menuItem:number;
-  @Output() onRemoveQuestion= new EventEmitter();
+  @Output() onRemoveQuestion=  new EventEmitter();
 
   constructor() { }
 
