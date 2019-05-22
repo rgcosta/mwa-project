@@ -3,7 +3,10 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../auth/auth.service';
 import {PushNotificationService} from '../services/push-notification.service';
-import {Subscription} from 'rxjs';
+import {of, Subject, Subscription} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
+import {SearchService} from '../services/search.service';
+
 
 @Component({
   selector: 'app-header',
@@ -14,13 +17,17 @@ export class HeaderComponent implements OnInit {
 
   @Input() user: any = {};
   messages: any[] = [];
+  searchResults: any[] = [];
   private src: string = '../../assets/profile.png';
   subscription: Subscription;
-  
+  subscription2: Subscription;
+  searchTextChanged = new Subject<string>();
+
   constructor(
     private authService: AuthService,
     private router: Router ,
-    protected pushNotificationService: PushNotificationService
+    protected pushNotificationService: PushNotificationService,
+    private _search: SearchService
   ) { }
 
   ngOnInit() {
@@ -35,6 +42,17 @@ export class HeaderComponent implements OnInit {
           this.messages = [];
         }
       });
+
+      this.subscription2 = this.searchTextChanged.pipe(
+          debounceTime(200),
+          distinctUntilChanged(),
+          switchMap(search => this._search.search(search).pipe(
+              tap(() => this.searchResults = []),
+              catchError(() => {
+                return of([]);
+              }))))
+          .subscribe((data) => { for ( const d of data) {
+            this.searchResults.push(d); }});
     }
   }
   removeNotifi(i): void {
@@ -52,8 +70,9 @@ export class HeaderComponent implements OnInit {
   navigate(link): void {
     this.router.navigate([link]);
   }
-  search($event): void {
-    console.log($event);
-  }
 
+  onkeypress(value) {
+    console.log(value);
+    this.searchTextChanged.next(value);
+  }
 }

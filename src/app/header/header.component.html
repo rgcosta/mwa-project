@@ -19,20 +19,28 @@
                             <i class="fas fa-bell"></i> Notifications <span class="badge badge-danger">{{messages.length || ''}}</span>
                         </a>
                         <ul class="dropdown-menu" >
-                            <div *ngIf="messages.length>0; else noNotification">
+                            <div *ngIf="messages.length>0; else noNotification" style="overflow:scroll; max-height:400px;">
                                 <li *ngFor="let message of messages; let i = index"><a class="nav-link" (click)="removeNotifi(i)"  routerLink="question/{{message.data['gcm.notification.questionId']}}">{{message.notification.body}}</a></li>
                             </div>
                         </ul>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                    <div class="dropdown">
+                        <div class="input-group" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                            </div>
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search Question" aria-label="Search" (keypress)='onkeypress($event.target.value)'>
                         </div>
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search Question" aria-label="Search" (keyup)="search($event)">
+                        <ul class="dropdown-menu">
+                            <div *ngIf="searchResults.length>0; else noSearch" style="overflow:scroll; max-height:400px;">
+                                <li *ngFor="let results of searchResults; let i = index"><a class="nav-link" (click)="removeNotifi(i)"  routerLink="question/{{results._id}}">{{  (results.title.length>50)? (results.title | slice:0:50)+'...':(results.title) }}</a></li>
+                            </div>
+                        </ul>
                     </div>
-                    <!--<button (click)="search($event)" class="btn btn-light"><i class="fa fa-search"></i></button>-->
+
+
                 </form>
                 
                 <ul class="navbar-nav ml-auto">
@@ -42,7 +50,7 @@
                             <i class="fas fa-user-circle text-muted" style="font-size: 42px;"></i>
                         </a>
                         <div class="nav navbar-nav">
-                            <div class="dropdown">
+                            <div class="dropdown" >
                                 <div class="dropdown-menu">
                                     <a [routerLink]="['/profile']" class="dropdown-item"><i class="far fa-user-circle"></i> Profile</a>
                                     <div class="dropdown-divider"></div>
@@ -66,5 +74,9 @@
         <li>
             <a class="nav-link">No nofitication</a>
         </li>
+    </div>
+</ng-template>
+<ng-template #noSearch>
+    <div>
     </div>
 </ng-template>
