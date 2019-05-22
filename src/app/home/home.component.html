@@ -23,7 +23,7 @@
                     </span>
                     <div class="media-body">
                       <span class="mt-0 username">{{ question.answers[0].username }} </span>
-                      <span class="updated text-muted"><i> {{question.createdAt | date}}</i></span>
+                      <span class="updated text-muted"><i> {{question.createdAt | amTimeAgo}}</i></span>
                       <div class="answer-body">
                         {{question.answers[0].body}}
                       </div>
