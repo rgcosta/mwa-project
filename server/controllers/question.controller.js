@@ -18,7 +18,8 @@ module.exports = {
   getById,
   addAnswer,
   upvoteAnswer,
-  downvoteAnswer
+  downvoteAnswer,
+  getAnswer
 };
 
 async function insert(question, user) {
@@ -65,4 +66,7 @@ async function upvoteAnswer(id,answerId){
 async function downvoteAnswer(id,answerId){
   await Question.update({_id:id,'answers._id':answerId}, {$inc:{ "answers.$.downvote": 1 }});
   return await Question.findOne({_id:id,'answers._id':answerId});
+}
+async function getAnswer(id,answerId){
+  return await Question.findOne({_id:id,'answers._id':answerId}).select('answers.$').lean();
 }

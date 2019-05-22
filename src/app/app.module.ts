@@ -20,6 +20,7 @@ import { HeaderComponent } from './header/header.component';
 
 import {PushNotificationService} from './services/push-notification.service';
 import {MatButtonModule, MatIconModule} from '@angular/material';
+import {QuestionService} from './services/home.service';
 
 
 
@@ -50,7 +51,7 @@ import {MatButtonModule, MatIconModule} from '@angular/material';
     provide: HTTP_INTERCEPTORS,
     useClass: CatchErrorInterceptor,
     multi: true,
-  }, PushNotificationService],
+  }, PushNotificationService, QuestionService],
   entryComponents: [],
   bootstrap: [AppComponent]
 })

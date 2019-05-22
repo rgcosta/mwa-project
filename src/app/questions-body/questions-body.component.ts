@@ -16,15 +16,15 @@ export class QuestionsBodyComponent implements OnInit {
   ngOnInit() {
     console.log(this.user.email);
   }
-  up(answerId) {
-    this.questions.upVote( this.user._id  , answerId).subscribe(data => {
+  up(questionId , answerId) {
+    this.questions.upVote( questionId  , answerId).subscribe(data => {
       this.question =  data;
     });
 
 
   }
-  down(answerId) {
-    this.questions.downVote(this.user._id , answerId).subscribe(data => {
+  down(questionId , answerId) {
+    this.questions.downVote(questionId , answerId).subscribe(data => {
       this.question = data;
     });
   }

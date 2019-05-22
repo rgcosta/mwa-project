@@ -43,11 +43,11 @@
               <br>
               <div class="row">
                 <div class="col-md-2">
-                  <a href="#" class="text-info" (click)="up( answer._id)"><i class="fas fa-arrow-up"></i><span>Upvote</span></a>&nbsp;
+                  <a class="text-info" (click)="up(question._id , answer._id)"><i class="fas fa-arrow-up"></i><span>Upvote</span></a>&nbsp;
                   <span>{{answer.upvote}}</span>
                 </div>
                 <div class="col-md-2">
-                  <a href="#" class="text-info" (click)="down(answer._id)"><i class="fas fa-arrow-down"></i><span>Downvote</span></a>&nbsp;
+                  <a  class="text-info" (click)="down(question._id ,answer._id)"><i class="fas fa-arrow-down"></i><span>Downvote</span></a>&nbsp;
                   <span>{{answer.downvote}}</span>
                 </div>
                 <div class="col">

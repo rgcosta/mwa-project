@@ -35,13 +35,13 @@ export class QuestionsComponent implements OnInit {
     private service: MakeRequestService,
     private userService: SetUserService,
     private routerActive: ActivatedRoute,
-    private router: Router, 
+    private router: Router,
     private authService: AuthService) {
 
     this.user = this.userService.getCachedData('user');
 
     this.subscription = this.routerActive.params.subscribe(param => {
-      this.questions = param.target; 
+      this.questions = param.target;
     });
 
     this.reqSubscription = this.service.getDataById(this.url, this.questions).subscribe(
@@ -54,12 +54,12 @@ export class QuestionsComponent implements OnInit {
   }
 
   addAnswer() {
-    if(!this.answerForm.valid) return;
-    let url = '/api/questions/' + this.questions + '/answers';
-    let {
+    if(!this.answerForm.valid) { return; }
+    const url = '/api/questions/' + this.questions + '/answers';
+    const {
       newAnswer,
     } = this.answerForm.getRawValue();
-    let content = {
+    const content = {
       body: newAnswer,
       username: this.user.fullname,
       isPublic: true,
@@ -69,6 +69,7 @@ export class QuestionsComponent implements OnInit {
                               .subscribe(data => {
                                 console.log(data);
                                 this.reqSubscription = this.service.getDataById(this.url, this.questions).subscribe(
+                                    // tslint:disable-next-line:no-shadowed-variable
                                   data => {
                                             this.question = data;
                                             this.arrTemp = this.question.answers.sort((a, b) => a.createdAt > b.createdAt ? -1 : 1);
@@ -85,10 +86,13 @@ export class QuestionsComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngOnDestroy(){
-    if(this.subscription)
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnDestroy() {
+    if (this.subscription) {
       this.subscription.unsubscribe();
-    if(this.reqSubscription)
+    }
+    if (this.reqSubscription) {
       this.reqSubscription.unsubscribe();
+    }
   }
 }
