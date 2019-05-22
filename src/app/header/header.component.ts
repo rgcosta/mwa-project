@@ -50,5 +50,8 @@ export class HeaderComponent implements OnInit {
   navigate(link): void {
     this.router.navigate([link]);
   }
+  search($event): void {
+    console.log($event);
+  }
 
 }
