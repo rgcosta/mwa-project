@@ -37,6 +37,10 @@ async function getAllAnswers(userId) {
     const project = {_id:1,body:1,createdAt:1,downvote:1,isPublic:1,picture:1,upvote:1,username:1}
     let answerIds = await Profile.findOne({'user._id':new ObjectId(userId)},{answers:1});
 
+    if (!answerIds) {
+        return JSON.parse('[]');
+    }
+
     let answers = [];
     let id ='';
     let answer = null;
